@@ -35,14 +35,7 @@
     .follower-button{
         height: 2rem;
         padding-left: 20px;
-        padding-right: 20px;
-
-        &:hover{
-            cursor: pointer;
-            color: var(--orange);
-            background: transparent;
-            border: 2px solid var(--orange);
-        }
+        padding-right: 20px;      
     }
   }
 }

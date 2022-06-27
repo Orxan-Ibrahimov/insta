@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~primeicons/primeicons.css';
-// @import '~primeng/resources/themes/saga-blue/theme.css';
-// @import '~primeng/resources/primeng.min.css';
-// @import '~primeflex/primeflex.scss';
+@import '~primeng/resources/themes/saga-blue/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeflex/primeflex.scss';
 
 :root{
     --yellow: #f5c32c;
@@ -30,4 +30,11 @@
     background: var(--buttonBg);
     border-radius: .5rem;
     transition: all .1s ease-in-out;
+
+    &:hover{
+        cursor: pointer;
+        color: var(--orange);
+        background: transparent;
+        border: 2px solid var(--orange);
+    }
 }

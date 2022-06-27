@@ -1,0 +1,84 @@
+.postShare {
+  display: flex;
+  gap: 1rem;
+  background-color: var(--cardColor);
+  padding: 1rem;
+  border-radius: 1rem;
+
+  & > img {
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    gap: 1rem;
+
+    & > input {
+      background-color: var(--inputColor);
+      border-radius: 10px;
+      padding: 10px;
+      font-style: 17px;
+      border: none;
+      outline: none;
+    }
+  }
+
+  .postOptions {
+    display: flex;
+    justify-content: space-around;
+
+    .option {
+      padding: 5px 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      & > span {
+        font-size: 12px;
+      }
+    }
+
+    .post-button {
+      padding: 5px 20px;
+      font-size: 12px;
+    }
+
+    #photo {
+      color: var(--photo);
+    }
+    #video {
+      color: var(--video);
+    }
+    #location {
+      color: var(--location);
+    }
+    #shedule {
+      color: var(--shedule);
+    }
+  }
+}
+
+.previewImage {
+  position: relative;
+
+  & > i {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    cursor: pointer;
+  }
+  & > img {
+    width: 100%;
+    object-fit: cover;
+    max-height: 20rem;
+  }
+}
