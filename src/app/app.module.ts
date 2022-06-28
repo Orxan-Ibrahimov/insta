@@ -11,6 +11,8 @@ import { FollowersCardComponent } from './components/followers-card/followers-ca
 import { PostSideComponent } from './components/post-side/post-side.component';
 import { PostShareComponent } from './components/post-share/post-share.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { RightSideComponent } from './components/right-side/right-side.component';
+import { TrendCardComponent } from './components/trend-card/trend-card.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { PostsComponent } from './components/posts/posts.component';
     FollowersCardComponent,
     PostSideComponent,
     PostShareComponent,
-    PostsComponent
+    PostsComponent,
+    RightSideComponent,
+    TrendCardComponent
   ],
   imports: [
     BrowserModule,

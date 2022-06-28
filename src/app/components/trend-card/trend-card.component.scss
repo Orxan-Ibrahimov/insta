@@ -1,0 +1,24 @@
+.trendCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--cardColor);
+  padding: 1rem;
+  padding-left: 2rem;
+  border-radius: 1rem;
+
+  .trend {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+
+    & > span:first-of-type {
+        font-weight: bold;
+    }
+
+    & > span:last-of-type {
+        font-size: 13px;
+    }
+
+  }
+}
