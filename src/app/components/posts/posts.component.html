@@ -1,0 +1,16 @@
+<div class="post">
+   <img src="../../../assets/img/{{Post?.image}}" alt="post" />
+
+   <div class="postReact">
+    <img src="../../../assets/img/{{Post?.liked?'like.png':'notlike.png'}}" alt="{{Post?.likes?'like':'notlike'}}" />
+    <img src="../../../assets/img/comment.png" alt="comment" />
+    <img src="../../../assets/img/share.png" alt="share" />
+   </div>
+
+   <span>{{Post?.likes}} likes</span>
+
+   <div class="detail">
+    <span><b>{{Post?.name}}</b></span>
+    <span> {{Post?.desc}}</span>
+   </div>
+</div>

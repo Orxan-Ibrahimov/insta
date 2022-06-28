@@ -10,6 +10,7 @@ import { ProfileCardComponent } from './components/profile-card/profile-card.com
 import { FollowersCardComponent } from './components/followers-card/followers-card.component';
 import { PostSideComponent } from './components/post-side/post-side.component';
 import { PostShareComponent } from './components/post-share/post-share.component';
+import { PostsComponent } from './components/posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PostShareComponent } from './components/post-share/post-share.component
     ProfileCardComponent,
     FollowersCardComponent,
     PostSideComponent,
-    PostShareComponent
+    PostShareComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
