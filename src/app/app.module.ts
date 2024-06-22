@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +20,11 @@ import { InfoCardComponent } from './components//info-card/info-card.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { InputMaskModule } from 'primeng/inputmask';
+import { FormsModule } from '@angular/forms';
+import { ProfileEditComponent } from './components/profile/profile-edit/profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -36,11 +43,18 @@ import { LoginComponent } from './components/auth/login/login.component';
     InfoCardComponent,
     AuthComponent,
     SignUpComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileEditComponent,
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    DialogModule,
+    ButtonModule,
+    InputMaskModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

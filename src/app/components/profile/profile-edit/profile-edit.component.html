@@ -1,0 +1,68 @@
+<p-dialog
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+>
+  <form action="" class="profile-form">
+    <h3>Your Info</h3>
+    <div class="profile-input-group">
+      <input
+        type="text"
+        class="profile-input"
+        name="first_name"
+        placeholder="First name..."
+      />
+      <input
+        type="text"
+        class="profile-input"
+        name="last_name"
+        placeholder="Last name..."
+      />
+    </div>
+    <div class="profile-input-group">
+      <input
+        type="text"
+        class="profile-input"
+        name="job"
+        placeholder="Works at.."
+      />
+    </div>
+    <div class="profile-input-group">
+      <input
+        type="text"
+        class="profile-input"
+        name="city"
+        placeholder="Lives in..."
+      />
+      <input
+        type="text"
+        class="profile-input"
+        name="country"
+        placeholder="Country..."
+      />
+    </div>
+    <div class="profile-input-group">
+      <input
+        type="text"
+        class="profile-input"
+        name="status"
+        placeholder="RelationShip Status.."
+      />
+    </div>
+    <div class="profile-input-group" style="justify-content: space-between;">
+      <label for="profile">
+        <p>Profile Image</p>
+        <input id="profile" type="file" class="profile-input" name="profile" />
+      </label>
+
+      <label for="cover">
+        <p>Cover Image</p>
+        <input id="cover" type="file" class="profile-input" name="cover" />
+      </label>
+    </div>
+
+    <button type="submit" class="button profile-button">Update</button>
+
+  </form>
+</p-dialog>
