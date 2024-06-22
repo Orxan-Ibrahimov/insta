@@ -8,5 +8,7 @@
 
     <app-trend-card></app-trend-card>
 
-    <button class="button r-button">Share</button>
+    <button class="button r-button" type="button" (click)="showPostModal()" label="Show" >Share</button>
+
+    <app-post-modal [post_visible]="visible"></app-post-modal>
 </div>

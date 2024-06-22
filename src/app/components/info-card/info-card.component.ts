@@ -11,7 +11,7 @@ import { InputTextModule } from 'primeng/inputtext';
 export class InfoCardComponent implements OnInit {
 
   constructor() { }
-  visible:boolean = true;
+  visible:boolean = false;
   showDialog(){
     this.visible = true;
   }

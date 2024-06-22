@@ -25,6 +25,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputMaskModule } from 'primeng/inputmask';
 import { FormsModule } from '@angular/forms';
 import { ProfileEditComponent } from './components/profile/profile-edit/profile-edit.component';
+import { PostModalComponent } from './components/modals/post-modal/post-modal.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ProfileEditComponent } from './components/profile/profile-edit/profile-
     SignUpComponent,
     LoginComponent,
     ProfileEditComponent,
+    PostModalComponent,
     
   ],
   imports: [

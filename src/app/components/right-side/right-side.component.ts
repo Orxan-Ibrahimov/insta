@@ -8,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class RightSideComponent implements OnInit {
 
   constructor() { }
+  visible:boolean = false;
+  showPostModal(){
+    this.visible = true;
+  }
 
+  closePostModal(){
+    this.visible = false;
+  }
   ngOnInit(): void {
   }
 
