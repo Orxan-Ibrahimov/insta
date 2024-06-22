@@ -1,0 +1,80 @@
+.auth {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 4rem;
+
+  & > .auth-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    & > .auth-logo {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    & > .auth-heading {
+      & > .auth-title {
+        font-size: 3rem;
+        background-color: red;
+        background-image: var(--buttonBg);
+        background-size: 100%;
+        background-repeat: repeat;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      & > .auth-description {
+        font-size: 0.85rem;
+      }
+    }
+  }
+  & > .auth-right {
+    & > .auth-form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 2rem;
+
+      background-color: var(--cardColor);
+      padding: 1rem;
+      border-radius: 1rem;
+
+      & > .auth-input-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 1rem;
+        height: 2rem;
+
+        & > .auth-input {
+          border: none;
+          outline: none;
+          background-color: var(--inputColor);
+          border-radius: 8px;
+          flex: 1;
+          padding: 20px;
+        }
+      }
+
+      & > .auth-question {
+      
+        & > .question-text{
+            font-size: 12px;
+        }
+      }
+
+      & > .auth-button{
+        width: 6rem;
+        height: 2rem;
+        align-self: flex-end;
+      }
+    }
+  }
+}

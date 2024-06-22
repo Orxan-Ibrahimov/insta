@@ -13,6 +13,11 @@ import { PostShareComponent } from './components/post-share/post-share.component
 import { PostsComponent } from './components/posts/posts.component';
 import { RightSideComponent } from './components/right-side/right-side.component';
 import { TrendCardComponent } from './components/trend-card/trend-card.component';
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { InfoCardComponent } from './components//info-card/info-card.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
+import { LoginComponent } from './components/auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,12 @@ import { TrendCardComponent } from './components/trend-card/trend-card.component
     PostShareComponent,
     PostsComponent,
     RightSideComponent,
-    TrendCardComponent
+    TrendCardComponent,
+    ProfilePageComponent,
+    InfoCardComponent,
+    AuthComponent,
+    SignUpComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,11 @@ export class ProfileCardComponent implements OnInit {
 
   constructor() { }
 
+  ProfilePage:boolean = true;
+
+  
+
+
   ngOnInit(): void {
   }
 

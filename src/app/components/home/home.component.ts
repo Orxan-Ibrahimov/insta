@@ -9,6 +9,9 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+  isProfile:boolean = false;
+
+
   ngOnInit(): void {
   }
 

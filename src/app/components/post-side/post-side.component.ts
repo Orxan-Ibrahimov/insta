@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/postData';
 
 @Component({
@@ -9,6 +9,8 @@ import { Post } from 'src/app/models/postData';
 export class PostSideComponent implements OnInit {
 
   constructor() { }
+
+  @Input('profilePage') myProfile :boolean;
 
   Posts:Post[] = [
     {id: 1, name: "Tzuyu", likes: 2300, liked:true, desc: "Happy New Year All friends! #2023", image:"postpic1.jpg" },
