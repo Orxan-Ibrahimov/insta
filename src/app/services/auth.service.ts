@@ -16,5 +16,9 @@ export class AuthService {
   login(nickname:string, password:string):Observable<User>{
    return this.http.post<User>(`${this.ApiUrl}/login`,{nickname,password})
   }
+
+  register(first_name:string, last_name:string,nickname:string, password:string, citizenship:string):Observable<User>{
+    return this.http.post<User>(`${this.ApiUrl}/register`,{first_name,last_name,nickname,password,citizenship})
+   }
 }
 

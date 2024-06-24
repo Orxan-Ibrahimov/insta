@@ -1,16 +1,19 @@
-<form class="auth-form">
+<form [formGroup]="form" class="auth-form">
   <h3>Sign up</h3>
   <div class="auth-input-group">
     <input
       type="text"
       class="auth-input"
-      name="first_name"
+      pInputText
+      id="first_name"
+      formControlName="first_name"
       placeholder="First name..."
     />
     <input
       type="text"
       class="auth-input"
-      name="last_name"
+      pInputText
+      formControlName="last_name"
       placeholder="Last name..."
     />
   </div>
@@ -18,21 +21,34 @@
     <input
       type="text"
       class="auth-input"
-      name="username"
-      placeholder="Username..."
+      pInputText
+      formControlName="nickname"
+      placeholder="Nickname..."
     />
+    <select class="auth-input" 
+    formControlName="citizenship">
+    <option value="" disabled>Choose</option>
+      <option
+        *ngFor="let citizenship of citizenships"
+        [value]="citizenship.id">
+        {{ citizenship.fullname }}
+      </option>
+    </select>
   </div>
   <div class="auth-input-group">
     <input
       type="password"
       class="auth-input"
-      name="password"
+      pInputText
+      formControlName="password"
       placeholder="Password..."
     />
+
     <input
       type="password"
       class="auth-input"
-      name="confirm_password"
+      pInputText
+      formControlName="confirm_password"
       placeholder="Confirm password..."
     />
   </div>
@@ -41,5 +57,7 @@
     <span class="question-text">Already have an account?</span>
     <a routerLink="/auth/login" class="auth-link">Log in!</a>
   </div>
-  <button type="submit" class="button auth-button">Signup</button>
+  <button type="submit" (click)="onSubmit()" class="button auth-button">
+    Signup
+  </button>
 </form>

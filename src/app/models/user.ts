@@ -4,8 +4,7 @@ export interface User {
   last_name: string;
   nickname: string;
   id: string;
-//   email: string;
-  passwordHash: string;
+  password: string;
 //   street: string;
 //   apartment: string;
 //   country: string;

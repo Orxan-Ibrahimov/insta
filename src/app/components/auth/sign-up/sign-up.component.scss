@@ -32,6 +32,11 @@
       text-decoration: none;
       margin-left: .5rem;
       color: var(--video);
+      transition: all .6s;
+
+      &:hover{
+        color: rgba($color: var(--video), $alpha: 1.5);
+      }
     }
   }
 
