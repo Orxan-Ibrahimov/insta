@@ -23,9 +23,12 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputMaskModule } from 'primeng/inputmask';
-import { FormsModule } from '@angular/forms';
-import { ProfileEditComponent } from './components/profile/profile-edit/profile-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostModalComponent } from './components/modals/post-modal/post-modal.component';
+import { ProfileEditModalComponent } from './components/modals/profile-edit-modal/profile-edit-modal.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthService } from './services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -45,8 +48,8 @@ import { PostModalComponent } from './components/modals/post-modal/post-modal.co
     AuthComponent,
     SignUpComponent,
     LoginComponent,
-    ProfileEditComponent,
     PostModalComponent,
+    ProfileEditModalComponent,
     
   ],
   imports: [
@@ -55,10 +58,12 @@ import { PostModalComponent } from './components/modals/post-modal/post-modal.co
     AppRoutingModule,
     DialogModule,
     ButtonModule,
+    HttpClientModule,
     InputMaskModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthGuardService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,24 +1,31 @@
-<form action="" class="auth-form">
+<form [formGroup]="form" class="auth-form">
   <h3>Log in</h3>
   <div class="auth-input-group">
     <input
       type="text"
       class="auth-input"
-      name="username"
-      placeholder="Username"
+      pInputText
+      placeholder="Nickname"
+      formControlName="nickname"
     />
   </div>
   <div class="auth-input-group">
     <input
       type="password"
       class="auth-input"
-      name="password"
+      pInputText
+      formControlName="password"
       placeholder="Password..."
     />
   </div>
 
+  <div class="col-12">
+    <small *ngIf="isSubmitted && authError">
+        <p class="p-error">{{authMessage}}</p>
+    </small>
+</div>
   <div class="auth-question">
     <span class="question-text">Don't have an account? Signup!</span>
-    <button type="submit" class="button auth-button">Login</button>
+    <button (click)="onSubmit()" class="button auth-button">Login</button>
   </div>
 </form>
