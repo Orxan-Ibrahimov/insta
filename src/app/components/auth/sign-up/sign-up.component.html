@@ -1,45 +1,45 @@
 <form class="auth-form">
-    <h3>Sign up</h3>
-    <div class="auth-input-group">
-      <input
-        type="text"
-        class="auth-input"
-        name="first_name"
-        placeholder="First name..."
-      />
-      <input
-        type="text"
-        class="auth-input"
-        name="last_name"
-        placeholder="Last name..."
-      />
-    </div>
-    <div class="auth-input-group">
-      
-      <input
-        type="text"
-        class="auth-input"
-        name="username"
-        placeholder="Username..."
-      />
-    </div>
-     <div class="auth-input-group">
-      <input
-        type="password"
-        class="auth-input"
-        name="password"
-        placeholder="Password..."
-      />
-      <input
-        type="password"
-        class="auth-input"
-        name="confirm_password"
-        placeholder="Confirm password..."
-      />
-    </div>
+  <h3>Sign up</h3>
+  <div class="auth-input-group">
+    <input
+      type="text"
+      class="auth-input"
+      name="first_name"
+      placeholder="First name..."
+    />
+    <input
+      type="text"
+      class="auth-input"
+      name="last_name"
+      placeholder="Last name..."
+    />
+  </div>
+  <div class="auth-input-group">
+    <input
+      type="text"
+      class="auth-input"
+      name="username"
+      placeholder="Username..."
+    />
+  </div>
+  <div class="auth-input-group">
+    <input
+      type="password"
+      class="auth-input"
+      name="password"
+      placeholder="Password..."
+    />
+    <input
+      type="password"
+      class="auth-input"
+      name="confirm_password"
+      placeholder="Confirm password..."
+    />
+  </div>
 
-    <div class="auth-question">
-      <span class="question-text">Already have an account? LOGIN</span>
-    </div>
-    <button type="submit" class="button auth-button">Signup</button>
-  </form>
+  <div class="auth-question">
+    <span class="question-text">Already have an account?</span>
+    <a routerLink="/auth/login" class="auth-link">Log in!</a>
+  </div>
+  <button type="submit" class="button auth-button">Signup</button>
+</form>

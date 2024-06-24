@@ -29,6 +29,7 @@ import { ProfileEditModalComponent } from './components/modals/profile-edit-moda
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from './components/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { HttpClientModule } from '@angular/common/http';
     DialogModule,
     ButtonModule,
     HttpClientModule,
+    // AuthModule,
     InputMaskModule,
     FormsModule,
     ReactiveFormsModule

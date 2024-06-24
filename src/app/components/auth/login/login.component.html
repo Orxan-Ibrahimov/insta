@@ -19,13 +19,12 @@
     />
   </div>
 
-  <div class="col-12">
-    <small *ngIf="isSubmitted && authError">
-        <p class="p-error">{{authMessage}}</p>
-    </small>
-</div>
+ 
   <div class="auth-question">
-    <span class="question-text">Don't have an account? Signup!</span>
-    <button (click)="onSubmit()" class="button auth-button">Login</button>
+    <span class="question-text">Don't have an account?</span>
+    <a routerLink="/auth/signup" class="auth-link">Signup!</a>
   </div>
+  <button (click)="onSubmit()" class="button auth-button">Login</button>
+
+
 </form>
