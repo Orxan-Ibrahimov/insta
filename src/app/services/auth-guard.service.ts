@@ -21,7 +21,7 @@ export class AuthGuardService implements CanActivate {
       return true
       }   
    
-  this.router.navigateByUrl('/');
+  this.router.navigateByUrl('/auth/login');
   return false;
   }
   private _getTokenExp(expiration:number):boolean {
