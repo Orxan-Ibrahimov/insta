@@ -10,5 +10,5 @@
 
     <button class="button r-button" type="button" (click)="showPostModal()" label="Show" >Share</button>
 
-    <app-post-modal [post_visible]="visible"></app-post-modal>
+    <app-post-modal [post_open]="visible" (post_close)="onModalClosed()"></app-post-modal>
 </div>

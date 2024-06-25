@@ -1,7 +1,8 @@
 <p-dialog
   [modal]="true"
-  [(visible)]="post_visible"
+  [(visible)]="post_open"
   [style]="{ width: '50rem' }"
+  (onHide)="closeModal($event)"
 >
   <app-post-share></app-post-share>
 </p-dialog>

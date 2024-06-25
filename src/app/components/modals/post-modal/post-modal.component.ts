@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Post } from 'src/app/models/postData';
 
 @Component({
@@ -9,13 +9,20 @@ import { Post } from 'src/app/models/postData';
 export class PostModalComponent implements OnInit {
 
   constructor() { }
-  @Input() post_visible: boolean;
+  @Input() post_open: boolean;
+  @Output() post_close = new EventEmitter<void>();
+
   showDialog(){
-    this.post_visible = true;
+    this.post_open = true;
   }
 
   closePostModal(){
-    this.post_visible = false;
+    this.post_open = false;
+  }
+
+  closeModal(event: Event) {
+    this.post_open = false;
+    this.post_close.emit();
   }
   ngOnInit(): void {
   }

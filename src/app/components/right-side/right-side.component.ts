@@ -13,7 +13,7 @@ export class RightSideComponent implements OnInit {
     this.visible = true;
   }
 
-  closePostModal(){
+  onModalClosed(){
     this.visible = false;
   }
   ngOnInit(): void {

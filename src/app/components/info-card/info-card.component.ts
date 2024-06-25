@@ -15,8 +15,8 @@ export class InfoCardComponent implements OnInit {
   showDialog(){
     this.visible = true;
   }
-
-  closeDialog(){
+ 
+  onModalClosed() {
     this.visible = false;
   }
   ngOnInit(): void {

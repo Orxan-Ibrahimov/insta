@@ -28,4 +28,4 @@
   </div>
 </div>
 
-<app-profile-edit-modal [is_visible]="visible"></app-profile-edit-modal>
+<app-profile-edit-modal [is_visible]="visible" (not_visible)="onModalClosed()"></app-profile-edit-modal>

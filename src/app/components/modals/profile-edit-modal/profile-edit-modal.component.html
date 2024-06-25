@@ -1,8 +1,10 @@
 <p-dialog
   [modal]="true"
+  [closable]="true"
   [(visible)]="visible"
   [style]="{ width: '50rem' }"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  (onHide)="closeModal($event)"
 >
   <form action="" class="profile-form">
     <h3>Your Info</h3>
