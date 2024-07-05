@@ -1,7 +1,8 @@
 import { isNull } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Post } from 'src/app/models/postData';
 import { User } from 'src/app/models/user';
 import { JwtService } from 'src/app/services/jwt.service';
 import { LocaleStorageService } from 'src/app/services/locale-storage.service';
@@ -15,7 +16,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class PostShareComponent implements OnInit {
   constructor(
-    private formBuilder: FormBuilder,
+    // private formBuilder: FormBuilder,
     private router: Router,
     private jwtService: JwtService,
     private localeStorageService: LocaleStorageService,
@@ -27,17 +28,12 @@ export class PostShareComponent implements OnInit {
   isImageSelected: boolean = false;
   my_new_post: FormGroup;
   user: User;
-  desc: string;
+  desc;
   postFormData: FormData;
   i_can_not_share: boolean = true;
+  @Output() Posts = new EventEmitter<Post[]>();
 
-  onInputChange(): void {
-    console.log(this.my_new_post.value.image);
-    
-    if (!this.desc) {
-      if (!this.my_new_post.value.image) this.i_can_not_share = true;
-    } else this.i_can_not_share = false;
-  }
+
   onChangeImage(event: any) {
     let selectedFile = (event.target as HTMLInputElement).files?.item(0);
 
@@ -66,25 +62,27 @@ export class PostShareComponent implements OnInit {
   }
 
   private _initPostForm() {
-    this.my_new_post = this.formBuilder.group({
-      description: ['', Validators.required],
-      image: [''],
-    });
+    // this.my_new_post = this.formBuilder.group({
+    //   // description: ['', Validators.required],
+    //   image: [''],
+    // });
   }
 
   SendPost() {
-    if (this.my_new_post.valid) {
+    if (this.desc) {
       if (!this.postFormData) this.postFormData = new FormData();
 
       this.postFormData.append('user', this.user.id);
       this.postFormData.append(
         'description',
-        this.my_new_post.value.description
+        this.desc
       );
       this.postService.addPost(this.postFormData).subscribe(
         (addedPost) => {
-          this._initPostForm();
+          this.desc = "";
           this.closeImage();
+          this.Posts.emit();
+          // this.refreshData();
         },
         (err) => {
           console.log(err);
@@ -94,12 +92,11 @@ export class PostShareComponent implements OnInit {
   }
 
   closeImage() {
-    console.log(this.my_new_post.value);
 
     this.isImageSelected = false;
-    this.my_new_post.patchValue({image: null});
+    // this.my_new_post.patchValue({image: null});
     this.postFormData.delete('image');
-    if (!this.my_new_post.value.description) this.i_can_not_share = true;
+    if (!this.desc) this.i_can_not_share = true;
   }
 
   ngOnInit(): void {
@@ -109,7 +106,7 @@ export class PostShareComponent implements OnInit {
       .getUserById(decodedToken.userId)
       .subscribe((db_user: User) => {
         this.user = db_user;
-        this.my_new_post.value.user = this.user.id;
+        // this.my_new_post.value.user = this.user.id;
       });
 
     this._initPostForm();

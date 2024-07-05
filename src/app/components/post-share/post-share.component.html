@@ -1,15 +1,15 @@
-<form [formGroup]="my_new_post" class="postShare">
+<form #form="ngForm" class="postShare">
   <img src="../../../assets/img/profileImg.jpg" alt="profile" />
   <div>
 
     <input
       type="text"
       pInputText
-      formControlName="description"
+      name="desc"
       placeholder="What's happening"
       [(ngModel)]="desc"
-      (ngModelChange)="onInputChange()"
     />
+    <p>{{ desc}}</p>
     <div class="postOptions">
       <a class="option" id="photo" (click)="choseImage(okus)">
         <i class="pi pi-image"></i> <span> Photo</span>
@@ -29,8 +29,6 @@
         <input
           #okus
           type="file"
-          pInputText
-          formControlName="image"
           accept="image/*"
           class="p-inputtext"
           (change)="onChangeImage($event)"

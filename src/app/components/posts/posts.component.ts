@@ -11,6 +11,7 @@ export class PostsComponent implements OnInit {
   constructor() { }
   @Input() Post: Post | undefined;
   ngOnInit(): void {
+    console.log("OK:");    
   }
 
 }

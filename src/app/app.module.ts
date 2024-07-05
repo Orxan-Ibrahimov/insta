@@ -61,7 +61,6 @@ import { AuthModule } from './components/auth/auth.module';
     ButtonModule,
     HttpClientModule,
     ReactiveFormsModule,
-    // AuthModule,
     InputMaskModule,
     FormsModule
   ],

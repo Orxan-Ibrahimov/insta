@@ -1,5 +1,7 @@
-<div class="post">
-   <img src="../../../assets/img/{{Post?.image}}" alt="post" />
+<div class="post" *ngIf="Post">
+   
+   <img *ngIf="Post.image" src="{{Post.image}}" alt="post" />
+
 
    <div class="postReact">
     <img src="../../../assets/img/{{Post?.liked?'like.png':'notlike.png'}}" alt="{{Post?.likes?'like':'notlike'}}" />
@@ -11,6 +13,6 @@
 
    <div class="detail">
     <span><b>{{Post?.name}}</b></span>
-    <span> {{Post?.desc}}</span>
+    <span> {{Post?.description}}</span>
    </div>
 </div>

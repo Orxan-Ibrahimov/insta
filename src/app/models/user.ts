@@ -1,4 +1,5 @@
 import { Citizenship } from "./citizenship";
+import { Post } from "./postData";
 
 export interface User {
   [x: string]: any;
@@ -10,5 +11,6 @@ export interface User {
   professional?:string;
   profile?:string;
   cover?:string;
+  posts?:Post[],
   citizenship:Citizenship
 }

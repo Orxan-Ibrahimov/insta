@@ -39,8 +39,7 @@ export class InfoCardComponent implements OnInit {
     this.usersService
       .getUserById(decodedToken.userId)
       .subscribe((db_user: User) => {
-        this.user = db_user;
-        
+        this.user = db_user;        
       });
   }
 }
