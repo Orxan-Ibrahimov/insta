@@ -1,3 +1,5 @@
+import { Citizenship } from "./citizenship";
+
 export interface User {
   [x: string]: any;
   first_name: string;
@@ -5,11 +7,8 @@ export interface User {
   nickname: string;
   id: string;
   password: string;
-//   street: string;
-//   apartment: string;
-//   country: string;
-//   zip: string;
-//   phone: string;
-//   city: string;
-//   isAdmin: boolean;
+  professional?:string;
+  profile?:string;
+  cover?:string;
+  citizenship:Citizenship
 }

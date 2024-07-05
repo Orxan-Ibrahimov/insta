@@ -63,8 +63,7 @@ import { AuthModule } from './components/auth/auth.module';
     ReactiveFormsModule,
     // AuthModule,
     InputMaskModule,
-    FormsModule,
-    ReactiveFormsModule
+    FormsModule
   ],
   providers: [AuthGuardService,AuthService],
   bootstrap: [AppComponent]

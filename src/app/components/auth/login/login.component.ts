@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private tokenStorage: LocaleStorageService
   ) {}
   ngOnInit(): void {
-    this._initAuthForm();
+    this._initAuthForm();    
   }
 
   private _initAuthForm() {

@@ -1,40 +1,50 @@
-<div class="postShare">
-    <img src="../../../assets/img/profileImg.jpg" alt="profile" />
-    <div>
-        <input type="text" placeholder="What's happening" />
-        <div class="postOptions">
-            <a class="option" id="photo" (click)="choseImage(okus)">
-                <i class="pi pi-image"></i> <span> Photo</span>
-            </a>
-            <div class="option" id="video">
-                <i class="pi pi-video"></i> <span> Video</span>
-            </div>
-            <div class="option" id="location">
-                <i class="pi pi-map-marker"></i> <span> Location</span>
-            </div>
-            <div class="option" id="shedule">
-                <i class="pi pi-calendar"></i> <span> Shedule</span>
-            </div>
-            <button class="button post-button">Share</button>
+<form [formGroup]="my_new_post" class="postShare">
+  <img src="../../../assets/img/profileImg.jpg" alt="profile" />
+  <div>
 
-            <div style="display: none;">
-                <input        
-                #okus
-                type="file"
-                name="myImage"   
-                accept="image/*"        
-                class="p-inputtext"     
-                (change)="onChangeImage($event)"
-                >
-               
-            </div>   
-        </div>
-        
-        <div class="previewImage" *ngIf="isImageSelected">
-            <i class="pi pi-times" (click)="closeImage()"></i>
-            <img  [src]="imagePreviewSrc" class="img-fluid rounded-start" alt="preview" />    
-        </div>
-        </div>
+    <input
+      type="text"
+      pInputText
+      formControlName="description"
+      placeholder="What's happening"
+      [(ngModel)]="desc"
+      (ngModelChange)="onInputChange()"
+    />
+    <div class="postOptions">
+      <a class="option" id="photo" (click)="choseImage(okus)">
+        <i class="pi pi-image"></i> <span> Photo</span>
+      </a>
+      <div class="option" id="video">
+        <i class="pi pi-video"></i> <span> Video</span>
+      </div>
+      <div class="option" id="location">
+        <i class="pi pi-map-marker"></i> <span> Location</span>
+      </div>
+      <div class="option" id="shedule">
+        <i class="pi pi-calendar"></i> <span> Shedule</span>
+      </div>
+      <button (click)="SendPost()" [ngClass]="{'disabled':i_can_not_share}" class="button post-button">Share</button>
+
+      <div style="display: none">
+        <input
+          #okus
+          type="file"
+          pInputText
+          formControlName="image"
+          accept="image/*"
+          class="p-inputtext"
+          (change)="onChangeImage($event)"
+        />
+      </div>
     </div>
-    
-    
+
+    <div class="previewImage" *ngIf="isImageSelected">
+      <i class="pi pi-times" (click)="closeImage()"></i>
+      <img
+        [src]="imagePreviewSrc"
+        class="img-fluid rounded-start"
+        alt="preview"
+      />
+    </div>
+  </div>
+</form>

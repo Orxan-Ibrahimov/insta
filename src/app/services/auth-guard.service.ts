@@ -16,7 +16,6 @@ export class AuthGuardService implements CanActivate {
   
     if(token)  {
       const tokenData = JSON.parse(atob(token));
-      console.log("salam");
       if(this._getTokenExp(tokenData.exp))
       return true
       }   

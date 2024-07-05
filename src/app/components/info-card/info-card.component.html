@@ -13,13 +13,14 @@
     </div>
 
     <div class="info">
-      <span class="info-title">Lives In</span>
-      <span class="info-text">Multan</span>
+      <span class="info-title">CitizenShip</span>
+      <!-- <span class="info-text">{{user.citizenship.fullname}}</span> -->
+      <img [src]="user?.citizenship.flag" alt="flag" width="30"  />
     </div>
 
     <div class="info">
-      <span class="info-title">Works at</span>
-      <span class="info-text">In In4Tech</span>
+      <span class="info-title">Professional is</span>
+      <span class="info-text">{{user?.professional}}</span>
     </div>
   </div>
 
