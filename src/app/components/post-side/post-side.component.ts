@@ -23,11 +23,10 @@ export class PostSideComponent implements OnInit {
 
   @Input('profilePage') myProfile: boolean;
   user: User;
-  Posts: Post[];
 
   PostRefreshed() {
     this.postService.getPosts().subscribe((updated_posts) => {
-      this.Posts = updated_posts;
+      this.user.posts = updated_posts;
     });
   }
   ngOnInit(): void {
@@ -36,7 +35,7 @@ export class PostSideComponent implements OnInit {
     this.usersService
       .getUserById(decodedToken.userId)
       .subscribe((db_user: User) => {
-        this.Posts = db_user.posts;
+        this.user = db_user;
       });
   }
 }
