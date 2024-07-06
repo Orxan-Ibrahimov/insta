@@ -4,10 +4,9 @@
   <div class="postReact">
     <button type="button" (click)="DoLike()">
       <img
-        src="../../../assets/img/{{ Post.liked ? 'like.png' : 'notlike.png' }}"
-        alt="{{ Post.liked ? 'like' : 'notlike' }}"
+        src="../../../assets/img/{{ liked ? 'like.png' : 'notlike.png' }}"
+        alt="{{liked ? 'like' : 'notlike'}}"
       />
-      {{like_id}}
     </button>
     <img src="../../../assets/img/comment.png" alt="comment" />
     <img src="../../../assets/img/share.png" alt="share" />

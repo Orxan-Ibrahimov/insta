@@ -28,6 +28,8 @@ export class PostSideComponent implements OnInit {
     this.postService.getPosts().subscribe((updated_posts) => {
       this.user.posts = updated_posts;
     });
+
+   
   }
   ngOnInit(): void {
     let token = this.localeStorageService.getItem();

@@ -17,7 +17,7 @@ export class LikeService {
   get(): Observable<Like[]> {
     return this.http.get<Like[]>(`${this.ApiUrl}`);
   }
-  add_like(like: FormData): Observable<Like> {
+  add_like(like: Like): Observable<Like> {
     return this.http.post<Like>(this.ApiUrl, like);
   }
   delete(lid: string): Observable<Like> {

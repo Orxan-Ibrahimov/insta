@@ -28,7 +28,6 @@ export class PostService {
   }
 
   addPost(post:FormData):Observable<Post>{
-    console.log(post);
     return this.http.post<Post>(this.ApiUrl,post);
   }
 
