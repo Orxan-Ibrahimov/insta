@@ -82,7 +82,6 @@ export class PostShareComponent implements OnInit {
           this.desc = "";
           this.closeImage();
           this.Posts.emit();
-          // this.refreshData();
         },
         (err) => {
           console.log(err);
