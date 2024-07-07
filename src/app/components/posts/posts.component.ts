@@ -1,8 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Like } from 'src/app/models/like';
 import { Post } from 'src/app/models/postData';
+import { User } from 'src/app/models/user';
+import { JwtService } from 'src/app/services/jwt.service';
 import { LikeService } from 'src/app/services/like.service';
+import { LocaleStorageService } from 'src/app/services/locale-storage.service';
 import { PostService } from 'src/app/services/post.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-posts',
@@ -12,15 +16,29 @@ import { PostService } from 'src/app/services/post.service';
 export class PostsComponent implements OnInit {
   constructor(
     private likeService: LikeService,
-    private postService: PostService
+    private postService: PostService,
+    private jwtService: JwtService,
+    private localeStorageService: LocaleStorageService,
+    private usersService: UsersService
+
   ) {}
   @Input() Post: Post | undefined;
+
+  user: User;
 
   like_id: string;
   liked: boolean;
 
   ngOnInit(): void {
     this.refresh_like_id(this.Post.likes);
+    let token = this.localeStorageService.getItem();
+    let decodedToken = this.jwtService.decodeToken(token);
+    this.usersService
+      .getUserById(decodedToken.userId)
+      .subscribe((db_user: User) => {
+        this.user = db_user;
+        console.log(this.user);
+      });
   }
 
   DoLike() {
@@ -32,6 +50,8 @@ export class PostsComponent implements OnInit {
         });
       });
     } else {
+      // console.log('ok');
+
       const like: Like = {
         who_likes: this.Post.user,
         post: this.Post,
@@ -50,7 +70,7 @@ export class PostsComponent implements OnInit {
 
   refresh_like_id(likes: Like[]) {
     likes.forEach((like) => {
-      if (like.post.id === this.Post.id) {
+      if (like.who_likes.id === this.Post.user.id) {
         this.liked = true;
         this.like_id = like.id;
       } else this.liked = false;

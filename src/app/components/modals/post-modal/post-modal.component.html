@@ -4,6 +4,6 @@
   [style]="{ width: '50rem' }"
   (onHide)="closeModal($event)"
 >
-  <app-post-share></app-post-share>
+  <app-post-share [share_close]="post_open" (share_close_export)="closePostModal()"></app-post-share>
 </p-dialog>
 

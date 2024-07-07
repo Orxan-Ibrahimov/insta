@@ -20,6 +20,16 @@ export class PostModalComponent implements OnInit {
     this.post_open = false;
   }
 
+  onModalClosed(){
+    
+  }
+
+  // PostRefreshed() {
+  //   this.postService.getPosts().subscribe((updated_posts) => {
+  //     this.user.posts = updated_posts;
+  //   });
+
+
   closeModal(event: Event) {
     this.post_open = false;
     this.post_close.emit();

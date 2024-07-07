@@ -1,6 +1,11 @@
 import { isNull } from '@angular/compiler/src/output/output_ast';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Post } from 'src/app/models/postData';
 import { User } from 'src/app/models/user';
@@ -32,6 +37,9 @@ export class PostShareComponent implements OnInit {
   postFormData: FormData;
   i_can_not_share: boolean = true;
   @Output() Posts = new EventEmitter<Post[]>();
+  
+  @Input() share_close: boolean;
+  @Output() share_close_export = new EventEmitter<void>();
 
 
   onChangeImage(event: any) {
@@ -73,15 +81,15 @@ export class PostShareComponent implements OnInit {
       if (!this.postFormData) this.postFormData = new FormData();
 
       this.postFormData.append('user', this.user.id);
-      this.postFormData.append(
-        'description',
-        this.desc
-      );
+      this.postFormData.append('description', this.desc);
       this.postService.addPost(this.postFormData).subscribe(
         (addedPost) => {
-          this.desc = "";
+          this.desc = '';
           this.closeImage();
           this.Posts.emit();
+          
+          this.share_close = false;
+          this.share_close_export.emit();
         },
         (err) => {
           console.log(err);
@@ -91,7 +99,6 @@ export class PostShareComponent implements OnInit {
   }
 
   closeImage() {
-
     this.isImageSelected = false;
     // this.my_new_post.patchValue({image: null});
     this.postFormData.delete('image');
