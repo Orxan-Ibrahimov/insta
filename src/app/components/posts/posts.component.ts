@@ -20,7 +20,6 @@ export class PostsComponent implements OnInit {
     private jwtService: JwtService,
     private localeStorageService: LocaleStorageService,
     private usersService: UsersService
-
   ) {}
   @Input() Post: Post | undefined;
 
@@ -30,14 +29,14 @@ export class PostsComponent implements OnInit {
   liked: boolean;
 
   ngOnInit(): void {
-    this.refresh_like_id(this.Post.likes);
+    // this.refresh_like_id(this.Post.likes);
     let token = this.localeStorageService.getItem();
     let decodedToken = this.jwtService.decodeToken(token);
     this.usersService
       .getUserById(decodedToken.userId)
       .subscribe((db_user: User) => {
         this.user = db_user;
-        console.log(this.user);
+        this.refresh_like_id(this.Post.likes);
       });
   }
 
@@ -45,15 +44,15 @@ export class PostsComponent implements OnInit {
     if (this.liked) {
       this.likeService.delete(this.like_id).subscribe((deletedLike) => {
         this.liked = false;
+        // this.refresh_like_id(this.Post.likes);
         this.postService.getPostById(this.Post.id).subscribe((p) => {
           this.Post = p;
         });
       });
     } else {
-      // console.log('ok');
 
       const like: Like = {
-        who_likes: this.Post.user,
+        who_likes: this.user,
         post: this.Post,
         id: '',
       };
@@ -69,10 +68,12 @@ export class PostsComponent implements OnInit {
   }
 
   refresh_like_id(likes: Like[]) {
+
     likes.forEach((like) => {
-      if (like.who_likes.id === this.Post.user.id) {
+      if (like.who_likes.id == this.user.id) {
         this.liked = true;
         this.like_id = like.id;
+        return;
       } else this.liked = false;
     });
   }
