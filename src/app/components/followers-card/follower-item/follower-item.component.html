@@ -1,0 +1,11 @@
+<div class="follower">
+    <div>
+        <img [src]="follower.profile" alt="follower" class="follower-image" />
+        <div class="name">
+            <span>{{follower.first_name}}</span>
+            <span>{{follower.last_name}}</span>
+        </div>
+    </div>
+    <button *ngIf="me.id != follower.id" class="button follower-button">Follow</button>
+    <p *ngIf="me.id === follower.id" class="me">me</p>
+</div>

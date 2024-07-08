@@ -30,6 +30,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './components/auth/auth.module';
+import { FollowerItemComponent } from './components/followers-card/follower-item/follower-item.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AuthModule } from './components/auth/auth.module';
     LoginComponent,
     PostModalComponent,
     ProfileEditModalComponent,
+    FollowerItemComponent,
     
   ],
   imports: [

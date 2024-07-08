@@ -1,9 +1,12 @@
 <div class="logoAndSearch">
     <img src="../../../assets/img/logo.png" alt="logo" />
     <div class="search">
-        <input type="text" placeholder="Right here..." />
+        <input type="text" placeholder="Right here..." [(ngModel)]="search" (ngModelChange)="onSearch()" />
         <div class="s-icon">
             <i class="pi pi-search"></i>
         </div>
     </div>
+</div>
+<div class="searchings">
+    <app-follower-item *ngFor="let follower of searching_users" [follower]="follower"></app-follower-item>
 </div>

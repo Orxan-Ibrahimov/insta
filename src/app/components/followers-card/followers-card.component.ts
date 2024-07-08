@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
+import { UsersService } from 'src/app/services/users.service';
 
 
 @Component({
@@ -7,13 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./followers-card.component.scss'],
 })
 export class FollowersCardComponent implements OnInit {
-  followers = [
-    { name: 'Andrew Thomas', username: 'AndrewThomas', image: 'img1.png' },
-    { name: 'Hulk Buster', username: 'HulkBuster', image: 'img2.png' },
-    { name: 'Thor', username: 'Thunder Master', image: 'img3.png' },
-    { name: 'Natasha', username: 'Natasha', image: 'img4.jpg' },
-  ];
-  constructor() {}
+  followers:User[];
+  constructor(
+    private usersService:UsersService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.usersService.getUsers().subscribe((all_users) => {
+      this.followers = all_users.slice(0,5);
+    });
+  }
 }

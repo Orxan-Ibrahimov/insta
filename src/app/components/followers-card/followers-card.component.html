@@ -1,13 +1,4 @@
 <div class="followersCard">
     <h3>Who is following you</h3>
-    <div class="follower" *ngFor="let follower of followers">
-        <div>
-            <img src="../../../assets/img/{{follower.image}}" alt="follower" class="follower-image" />
-            <div class="name">
-                <span>{{follower.name}}</span>
-                <span>{{follower.username}}</span>
-            </div>
-        </div>
-        <button class="button follower-button">Follow</button>
-    </div>
+    <app-follower-item *ngFor="let follower of followers" [follower]="follower"></app-follower-item>
 </div>
