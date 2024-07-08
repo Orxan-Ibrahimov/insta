@@ -17,15 +17,11 @@ export class ProfileCardComponent implements OnInit {
   ) {}
 
   ProfilePage: boolean = true;
-  user: User;
+  me: User;
 
   ngOnInit(): void {
-    let token = this.localeStorageService.getItem();
-    let decodedToken = this.jwtService.decodeToken(token);
-    this.usersService
-      .getUserById(decodedToken.userId)
-      .subscribe((db_user: User) => {
-        this.user = db_user;        
-      });
+    this.localeStorageService.me().subscribe((me) => {
+      this.me = me;
+    });
   }
 }

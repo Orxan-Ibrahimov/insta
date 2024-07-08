@@ -23,21 +23,17 @@ export class PostsComponent implements OnInit {
   ) {}
   @Input() Post: Post | undefined;
 
-  user: User;
+  me: User;
 
   like_id: string;
   liked: boolean;
 
   ngOnInit(): void {
     // this.refresh_like_id(this.Post.likes);
-    let token = this.localeStorageService.getItem();
-    let decodedToken = this.jwtService.decodeToken(token);
-    this.usersService
-      .getUserById(decodedToken.userId)
-      .subscribe((db_user: User) => {
-        this.user = db_user;
-        this.refresh_like_id(this.Post.likes);
-      });
+    this.localeStorageService.me().subscribe((me) => {
+      this.me = me;
+      this.refresh_like_id(this.Post.likes);
+    });    
   }
 
   DoLike() {
@@ -52,7 +48,7 @@ export class PostsComponent implements OnInit {
     } else {
 
       const like: Like = {
-        who_likes: this.user,
+        who_likes: this.me,
         post: this.Post,
         id: '',
       };
@@ -70,7 +66,7 @@ export class PostsComponent implements OnInit {
   refresh_like_id(likes: Like[]) {
 
     likes.forEach((like) => {
-      if (like.who_likes.id == this.user.id) {
+      if (like.who_likes.id == this.me.id) {
         this.liked = true;
         this.like_id = like.id;
         return;

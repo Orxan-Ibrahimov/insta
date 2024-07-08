@@ -26,12 +26,12 @@ export class ProfileEditModalComponent implements OnInit {
 
   @Output() updated_user = new EventEmitter<User>();
 
-  my_user: User = {
+  me: User = {
     first_name: '',
     last_name: '',
     nickname: '',
     id: '',
-    password: ''
+    password: '',
   };
   citizenships: Citizenship[];
   selectedCitizenship;
@@ -76,11 +76,10 @@ export class ProfileEditModalComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    
     if (form.valid && (!this.profile_error || !this.cover_error)) {
-      if (!form.form.value.citizenship) 
-        form.form.value.citizenship= this.my_user.citizenship.id;
-      let postformdata = new FormData();    
+      if (!form.form.value.citizenship)
+        form.form.value.citizenship = this.me.citizenship.id;
+      let postformdata = new FormData();
 
       postformdata.append('cover', this.cover);
       postformdata.append('profile', this.profile);
@@ -92,7 +91,7 @@ export class ProfileEditModalComponent implements OnInit {
       postformdata.append('professional', form.form.value.professional);
 
       this.usersService
-        .updateUser(postformdata, this.my_user.id)
+        .updateUser(postformdata, this.me.id)
         .subscribe((updatedUser) => {
           this.visible = false;
           this.not_visible.emit();
@@ -101,22 +100,12 @@ export class ProfileEditModalComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    let token = this.localeStorageService.getItem();
-    let decodedToken = this.jwtService.decodeToken(token);
-    this.usersService
-      .getUserById(decodedToken.userId)
-      .subscribe((db_user: User) => {
-        this.my_user = db_user;
-        this.selectedCitizenship = this.my_user?.citizenship.fullname;
-        this.citizenshipsService.get().subscribe((cs: Citizenship[]) => {
-          this.citizenships = cs;
-        
-        console.log(this.selectedCitizenship);
-        
+    this.localeStorageService.me().subscribe((me) => {
+      this.me = me;
+      this.selectedCitizenship = this.me?.citizenship.fullname;
+      this.citizenshipsService.get().subscribe((cs: Citizenship[]) => {
+        this.citizenships = cs;
       });
-
-   
-      
     });
   }
 }

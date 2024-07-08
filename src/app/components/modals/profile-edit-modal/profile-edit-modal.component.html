@@ -19,7 +19,7 @@
           ngModel
           required
           minlength="3"
-          [(ngModel)]="my_user.first_name"
+          [(ngModel)]="me.first_name"
         />
         <div
           *ngIf="
@@ -45,7 +45,7 @@
           ngModel
           required
           minlength="3"
-          [(ngModel)]="my_user.last_name"
+          [(ngModel)]="me.last_name"
         />
         <div
           *ngIf="
@@ -73,7 +73,7 @@
           ngModel
           required
           minlength="3"
-          [(ngModel)]="my_user.professional"
+          [(ngModel)]="me.professional"
         />
         <div
           *ngIf="
@@ -101,7 +101,7 @@
           required
           minlength="3"
           placeholder="Nickname..."
-          [(ngModel)]="my_user.nickname"
+          [(ngModel)]="me.nickname"
         />
         <div
           *ngIf="
@@ -130,7 +130,7 @@
           <option
             *ngFor="let citizenship of citizenships"
             [value]="citizenship.id"
-            [selected]="my_user.citizenship.id"
+            [selected]="me.citizenship.id"
           >
             {{ citizenship.fullname }}
           </option>
@@ -158,7 +158,7 @@
           ngModel
           required
           minlength="3"
-          [(ngModel)]="my_user.status"
+          [(ngModel)]="me.status"
         />
         <div
         *ngIf="

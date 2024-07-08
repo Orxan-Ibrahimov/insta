@@ -31,7 +31,7 @@ export class PostShareComponent implements OnInit {
 
   imagePreviewSrc: string | ArrayBuffer | null | undefined = '';
   isImageSelected: boolean = false;
-  user: User;
+  me: User;
   desc;
   postFormData: FormData;
   i_can_not_share: boolean = true;
@@ -71,7 +71,7 @@ export class PostShareComponent implements OnInit {
     if (this.desc) {
       if (!this.postFormData) this.postFormData = new FormData();
 
-      this.postFormData.append('user', this.user.id);
+      this.postFormData.append('user', this.me.id);
       this.postFormData.append('description', this.desc);
       this.postService.addPost(this.postFormData).subscribe(
         (addedPost) => {
@@ -96,12 +96,8 @@ export class PostShareComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let token = this.localeStorageService.getItem();
-    let decodedToken = this.jwtService.decodeToken(token);
-    this.usersService
-      .getUserById(decodedToken.userId)
-      .subscribe((db_user: User) => {
-        this.user = db_user;
-      });
+    this.localeStorageService.me().subscribe((me) => {
+      this.me = me;
+    });
   }
 }

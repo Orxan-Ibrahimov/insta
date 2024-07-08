@@ -9,18 +9,18 @@
   <div class="info-body">
     <div class="info">
       <span class="info-title">Status</span>
-      <span class="info-text">{{ user?.status }}</span>
+      <span class="info-text">{{ me?.status }}</span>
     </div>
 
     <div class="info">
       <span class="info-title">CitizenShip</span>
       <!-- <span class="info-text">{{user.citizenship.fullname}}</span> -->
-      <img [src]="user?.citizenship.flag" alt="flag" width="30"  />
+      <img [src]="me?.citizenship.flag" alt="flag" width="30"  />
     </div>
 
     <div class="info">
       <span class="info-title">Professional is</span>
-      <span class="info-text">{{user?.professional}}</span>
+      <span class="info-text">{{me?.professional}}</span>
     </div>
   </div>
 

@@ -1,7 +1,7 @@
 <div class="profileCard">
   <div class="profile-images">
-    <img src="../../../assets/img/cover.jpg" alt="cover" />
-    <img src="../../../assets/img/profileImg.jpg" alt="profile" />
+    <img [src]="me?.cover" alt="cover" />
+    <img [src]="me?.profile" alt="profile" />
   </div>
 
   <div class="profile-name">
@@ -24,7 +24,7 @@
 
       <div class="vl" *ngIf="ProfilePage"></div>
       <div class="follow" *ngIf="ProfilePage">
-        <span>{{ this.user?.posts.length }}</span>
+        <span>{{ this.me?.posts.length }}</span>
         <span>Posts</span>
       </div>
     </div>

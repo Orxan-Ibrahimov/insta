@@ -18,7 +18,7 @@ export class InfoCardComponent implements OnInit {
     private usersService: UsersService
   ) {}
   visible: boolean = false;
-  user: User;
+  me: User;
 
   showDialog() {
     this.visible = true;
@@ -32,17 +32,11 @@ export class InfoCardComponent implements OnInit {
   }
 
   RefreshedUser(data: User) {
-    console.log(data);
-    
-    this.user = data;
+    this.me = data;
   }
   ngOnInit(): void {
-    let token = this.localeStorageService.getItem();
-    let decodedToken = this.jwtService.decodeToken(token);
-    this.usersService
-      .getUserById(decodedToken.userId)
-      .subscribe((db_user: User) => {
-        this.user = db_user;
-      });
+    this.localeStorageService.me().subscribe((me) => {
+      this.me = me;
+    });
   }
 }
