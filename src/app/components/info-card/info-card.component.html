@@ -9,7 +9,7 @@
   <div class="info-body">
     <div class="info">
       <span class="info-title">Status</span>
-      <span class="info-text">In RelationShip</span>
+      <span class="info-text">{{ user?.status }}</span>
     </div>
 
     <div class="info">
@@ -29,4 +29,4 @@
   </div>
 </div>
 
-<app-profile-edit-modal [is_visible]="visible" (not_visible)="onModalClosed()"></app-profile-edit-modal>
+<app-profile-edit-modal [is_visible]="visible" (updated_user)="RefreshedUser($event)" (not_visible)="onModalClosed()"></app-profile-edit-modal>

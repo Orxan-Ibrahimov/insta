@@ -123,15 +123,14 @@
         <select
           class="profile-input"
           name="citizenship"
-          [(ngModel)]="my_user.citizenship"
           style="color: black"
           ngModel
-          required
+          
         >
-          <option disabled selected>Choose</option>
           <option
             *ngFor="let citizenship of citizenships"
             [value]="citizenship.id"
+            [selected]="my_user.citizenship.id"
           >
             {{ citizenship.fullname }}
           </option>
@@ -156,7 +155,25 @@
           class="profile-input"
           name="status"
           placeholder="RelationShip Status.."
+          ngModel
+          required
+          minlength="3"
+          [(ngModel)]="my_user.status"
         />
+        <div
+        *ngIf="
+          form.submitted ||
+          (form.controls['status']?.dirty &&
+            form.controls['status']?.invalid)
+        "
+      >
+        <div *ngIf="form.controls['status']?.errors?.['required']">
+          RelationShip status is required.
+        </div>
+        <div *ngIf="form.controls['status']?.errors?.['minlength']">
+          RelationShip status must be at least 3 characters long.
+        </div>
+      </div>
       </div>
     </div>
     <div class="profile-input-group" style="justify-content: space-between">
@@ -168,7 +185,6 @@
             type="file"
             class="profile-input"
             name="profile"
-            required
             ngModel
             (change)="onFileChange($event, 'profile')"
           />

@@ -24,15 +24,17 @@ export class ProfileEditModalComponent implements OnInit {
   @Input('is_visible') visible: boolean = false;
   @Output() not_visible = new EventEmitter<void>();
 
+  @Output() updated_user = new EventEmitter<User>();
+
   my_user: User = {
     first_name: '',
     last_name: '',
     nickname: '',
     id: '',
-    password: '',
-    citizenship: undefined,
+    password: ''
   };
   citizenships: Citizenship[];
+  selectedCitizenship;
   profile: File | null = null;
   cover: File | null = null;
   profile_error: string;
@@ -74,22 +76,27 @@ export class ProfileEditModalComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (form.valid || !this.profile_error || !this.cover_error) {
-      let postformdata = new FormData();
+    
+    if (form.valid && (!this.profile_error || !this.cover_error)) {
+      if (!form.form.value.citizenship) 
+        form.form.value.citizenship= this.my_user.citizenship.id;
+      let postformdata = new FormData();    
+
       postformdata.append('cover', this.cover);
       postformdata.append('profile', this.profile);
-      postformdata.append('citizenship', this.my_user.citizenship.id);
-      postformdata.append('first_name', this.my_user.first_name);
-      postformdata.append('last_name', this.my_user.last_name);
-      postformdata.append('nickname', this.my_user.nickname);
-      postformdata.append('professional', this.my_user.professional);
-      console.log(postformdata.get('profile'));
-      // return;
+      postformdata.append('citizenship', form.form.value.citizenship);
+      postformdata.append('status', form.form.value.status);
+      postformdata.append('first_name', form.form.value.first_name);
+      postformdata.append('last_name', form.form.value.last_name);
+      postformdata.append('nickname', form.form.value.nickname);
+      postformdata.append('professional', form.form.value.professional);
+
       this.usersService
         .updateUser(postformdata, this.my_user.id)
         .subscribe((updatedUser) => {
           this.visible = false;
           this.not_visible.emit();
+          this.updated_user.emit(updatedUser);
         });
     }
   }
@@ -100,11 +107,16 @@ export class ProfileEditModalComponent implements OnInit {
       .getUserById(decodedToken.userId)
       .subscribe((db_user: User) => {
         this.my_user = db_user;
-        // this.fname = this.my_user.first_name;
+        this.selectedCitizenship = this.my_user?.citizenship.fullname;
+        this.citizenshipsService.get().subscribe((cs: Citizenship[]) => {
+          this.citizenships = cs;
+        
+        console.log(this.selectedCitizenship);
+        
       });
 
-    this.citizenshipsService.get().subscribe((cs: Citizenship[]) => {
-      this.citizenships = cs;
+   
+      
     });
   }
 }

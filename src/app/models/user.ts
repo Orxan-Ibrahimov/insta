@@ -11,6 +11,7 @@ export interface User {
   professional?:string;
   profile?:string;
   cover?:string;
+  status?:string;
   posts?:Post[],
-  citizenship:Citizenship
+  citizenship?:Citizenship
 }

@@ -1,7 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DialogModule } from 'primeng/dialog';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
@@ -33,14 +30,19 @@ export class InfoCardComponent implements OnInit {
   onModalClosed() {
     this.visible = false;
   }
+
+  RefreshedUser(data: User) {
+    console.log(data);
+    
+    this.user = data;
+  }
   ngOnInit(): void {
     let token = this.localeStorageService.getItem();
     let decodedToken = this.jwtService.decodeToken(token);
     this.usersService
       .getUserById(decodedToken.userId)
       .subscribe((db_user: User) => {
-        this.user = db_user;        
+        this.user = db_user;
       });
   }
 }
-
