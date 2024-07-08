@@ -6,65 +6,211 @@
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
   (onHide)="closeModal($event)"
 >
-  <form action="" class="profile-form">
+  <form #form="ngForm" class="profile-form" (ngSubmit)="onSubmit(form)">
     <h3>Your Info</h3>
     <div class="profile-input-group">
-      <input
-        type="text"
-        class="profile-input"
-        name="first_name"
-        placeholder="First name..."
-      />
-      <input
-        type="text"
-        class="profile-input"
-        name="last_name"
-        placeholder="Last name..."
-      />
+      <div class="error-box">
+        <input
+          type="text"
+          class="profile-input"
+          id="first_name"
+          name="first_name"
+          placeholder="First name..."
+          ngModel
+          required
+          minlength="3"
+          [(ngModel)]="my_user.first_name"
+        />
+        <div
+          *ngIf="
+            form.submitted ||
+            (form.controls['first_name']?.dirty &&
+              form.controls['first_name']?.invalid)
+          "
+        >
+          <div *ngIf="form.controls['first_name']?.errors?.['required']">
+            First name is required.
+          </div>
+          <div *ngIf="form.controls['first_name']?.errors?.['minlength']">
+            First name must be at least 3 characters long.
+          </div>
+        </div>
+      </div>
+      <div class="error-box">
+        <input
+          type="text"
+          class="profile-input"
+          name="last_name"
+          placeholder="Last name..."
+          ngModel
+          required
+          minlength="3"
+          [(ngModel)]="my_user.last_name"
+        />
+        <div
+          *ngIf="
+            form.submitted ||
+            (form.controls['last_name']?.dirty &&
+              form.controls['last_name']?.invalid)
+          "
+        >
+          <div *ngIf="form.controls['last_name']?.errors?.['required']">
+            Last name is required.
+          </div>
+          <div *ngIf="form.controls['last_name']?.errors?.['minlength']">
+            Last name must be at least 3 characters long.
+          </div>
+        </div>
+      </div>
     </div>
     <div class="profile-input-group">
-      <input
-        type="text"
-        class="profile-input"
-        name="job"
-        placeholder="Works at.."
-      />
+      <div class="error-box">
+        <input
+          type="text"
+          class="profile-input"
+          name="professional"
+          placeholder="Professional..."
+          ngModel
+          required
+          minlength="3"
+          [(ngModel)]="my_user.professional"
+        />
+        <div
+          *ngIf="
+            form.submitted ||
+            (form.controls['professional']?.dirty &&
+              form.controls['professional']?.invalid)
+          "
+        >
+          <div *ngIf="form.controls['professional']?.errors?.['required']">
+            Professional is required.
+          </div>
+          <div *ngIf="form.controls['professional']?.errors?.['minlength']">
+            Professional must be at least 3 characters long.
+          </div>
+        </div>
+      </div>
     </div>
     <div class="profile-input-group">
-      <input
-        type="text"
-        class="profile-input"
-        name="city"
-        placeholder="Lives in..."
-      />
-      <input
-        type="text"
-        class="profile-input"
-        name="country"
-        placeholder="Country..."
-      />
-    </div>
-    <div class="profile-input-group">
-      <input
-        type="text"
-        class="profile-input"
-        name="status"
-        placeholder="RelationShip Status.."
-      />
-    </div>
-    <div class="profile-input-group" style="justify-content: space-between;">
-      <label for="profile">
-        <p>Profile Image</p>
-        <input id="profile" type="file" class="profile-input" name="profile" />
-      </label>
+      <div class="error-box">
+        <input
+          type="text"
+          class="profile-input"
+          name="nickname"
+          ngModel
+          required
+          minlength="3"
+          placeholder="Nickname..."
+          [(ngModel)]="my_user.nickname"
+        />
+        <div
+          *ngIf="
+            form.submitted ||
+            (form.controls['nickname']?.dirty &&
+              form.controls['nickname']?.invalid)
+          "
+        >
+          <div *ngIf="form.controls['nickname']?.errors?.['required']">
+            Nickname is required.
+          </div>
+          <div *ngIf="form.controls['nickname']?.errors?.['minlength']">
+            Nickname must be at least 3 characters long.
+          </div>
+        </div>
+      </div>
 
-      <label for="cover">
-        <p>Cover Image</p>
-        <input id="cover" type="file" class="profile-input" name="cover" />
-      </label>
+      <div class="error-box">
+        <select
+          class="profile-input"
+          name="citizenship"
+          [(ngModel)]="my_user.citizenship"
+          style="color: black"
+          ngModel
+          required
+        >
+          <option disabled selected>Choose</option>
+          <option
+            *ngFor="let citizenship of citizenships"
+            [value]="citizenship.id"
+          >
+            {{ citizenship.fullname }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            form.submitted ||
+            (form.controls['citizenship']?.dirty &&
+              form.controls['citizenship']?.invalid)
+          "
+        >
+          <div *ngIf="form.controls['citizenship']?.errors?.['required']">
+            citizenship is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-input-group">
+      <div class="error-box">
+        <input
+          type="text"
+          class="profile-input"
+          name="status"
+          placeholder="RelationShip Status.."
+        />
+      </div>
+    </div>
+    <div class="profile-input-group" style="justify-content: space-between">
+      <div class="error-box">
+        <label for="profile">
+          <p>Profile Image</p>
+          <input
+            id="profile"
+            type="file"
+            class="profile-input"
+            name="profile"
+            required
+            ngModel
+            (change)="onFileChange($event, 'profile')"
+          />
+        </label>
+
+        <div
+          *ngIf="
+            form.submitted ||
+            (form.controls['profile']?.dirty &&
+              form.controls['profile']?.invalid)
+          "
+        >
+          <div *ngIf="profile_error">
+            {{ profile_error }}
+          </div>
+        </div>
+      </div>
+
+      <div class="error-box">
+        <label for="cover">
+          <p>Cover Image</p>
+          <input
+            id="cover"
+            type="file"
+            class="profile-input"
+            name="cover"
+            (change)="onFileChange($event, 'cover')"
+          />
+        </label>
+        <div
+          *ngIf="
+            form.submitted ||
+            (form.controls['cover']?.dirty && form.controls['cover']?.invalid)
+          "
+        >
+          <div *ngIf="cover_error">
+            {{ cover_error }}
+          </div>
+        </div>
+      </div>
     </div>
 
     <button type="submit" class="button profile-button">Update</button>
-
   </form>
 </p-dialog>

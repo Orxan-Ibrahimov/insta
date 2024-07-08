@@ -1,23 +1,27 @@
 .profile-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: var(--cardColor);
+  padding: 1rem;
+  border-radius: 1rem;
+
+  & > .profile-input-group {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 2rem;
-  
-    background-color: var(--cardColor);
-    padding: 1rem;
-    border-radius: 1rem;
-  
-    & > .profile-input-group {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    width: 100%;
+    gap: 1rem;
+    height: 2rem;
+    margin: .5rem 0;
+
+    div.error-box {
       width: 100%;
-      gap: 1rem;
-      height: 2rem;
-  
-      & > .profile-input {
+      .profile-input {
+        width: 100%;
+
         border: none;
         outline: none;
         background-color: var(--inputColor);
@@ -26,13 +30,12 @@
         padding: 20px;
       }
     }
-  
-  
-  
-    & > .profile-button{
-      width: 6rem;
-      height: 2.5rem;
-      align-self: flex-end;
-      margin: 2rem 0;
-    }
   }
+
+  & > .profile-button {
+    width: 6rem;
+    height: 2.5rem;
+    align-self: flex-end;
+    margin: 2rem 0;
+  }
+}

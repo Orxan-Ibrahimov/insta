@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
+import { NgForm } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,8 @@ export class UsersService {
     return this.http.post<User>(this.ApiUrl,user);
   }
 
-  updateUser(user:User):Observable<User>{
-    return this.http.put<User>(`${this.ApiUrl}/${user.id}`,user);
+  updateUser(user:FormData, id:string):Observable<User>{
+    return this.http.put<User>(`${this.ApiUrl}/${id}`,user);
   }
 
   RemoveUser(userId:string):Observable<User>{

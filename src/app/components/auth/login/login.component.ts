@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   private _initAuthForm() {
     this.form = this.formBuilder.group({
       nickname: ['Okus', Validators.required],
-      password: ['Okus', Validators.required],
+      password: ['Orxan620', Validators.required],
     });
   }
 

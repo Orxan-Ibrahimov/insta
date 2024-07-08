@@ -24,12 +24,12 @@
 
       <div class="vl" *ngIf="ProfilePage"></div>
       <div class="follow" *ngIf="ProfilePage">
-        <span>3</span>
+        <span>{{ this.user?.posts.length }}</span>
         <span>Posts</span>
       </div>
     </div>
     <hr />
   </div>
 
-  <span id="myProfile"*ngIf="!ProfilePage">My Profile</span>
+  <span id="myProfile" *ngIf="!ProfilePage">My Profile</span>
 </div>

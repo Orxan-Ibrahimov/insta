@@ -38,7 +38,7 @@ export class SignUpComponent implements OnInit {
       last_name: ['', [Validators.required, Validators.minLength(3)]],
       nickname: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      confirm_password: ['', Validators.required],
+      confirm_password: ['', Validators.required, Validators.apply],
       citizenship: ['', Validators.required],
     });
   }

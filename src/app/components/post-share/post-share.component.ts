@@ -31,16 +31,14 @@ export class PostShareComponent implements OnInit {
 
   imagePreviewSrc: string | ArrayBuffer | null | undefined = '';
   isImageSelected: boolean = false;
-  my_new_post: FormGroup;
   user: User;
   desc;
   postFormData: FormData;
   i_can_not_share: boolean = true;
   @Output() Posts = new EventEmitter<Post[]>();
-  
+
   @Input() share_close: boolean;
   @Output() share_close_export = new EventEmitter<void>();
-
 
   onChangeImage(event: any) {
     let selectedFile = (event.target as HTMLInputElement).files?.item(0);
@@ -69,13 +67,6 @@ export class PostShareComponent implements OnInit {
     element.click();
   }
 
-  private _initPostForm() {
-    // this.my_new_post = this.formBuilder.group({
-    //   // description: ['', Validators.required],
-    //   image: [''],
-    // });
-  }
-
   SendPost() {
     if (this.desc) {
       if (!this.postFormData) this.postFormData = new FormData();
@@ -87,7 +78,7 @@ export class PostShareComponent implements OnInit {
           this.desc = '';
           this.closeImage();
           this.Posts.emit();
-          
+
           this.share_close = false;
           this.share_close_export.emit();
         },
@@ -100,7 +91,6 @@ export class PostShareComponent implements OnInit {
 
   closeImage() {
     this.isImageSelected = false;
-    // this.my_new_post.patchValue({image: null});
     this.postFormData.delete('image');
     if (!this.desc) this.i_can_not_share = true;
   }
@@ -112,13 +102,6 @@ export class PostShareComponent implements OnInit {
       .getUserById(decodedToken.userId)
       .subscribe((db_user: User) => {
         this.user = db_user;
-        // this.my_new_post.value.user = this.user.id;
       });
-
-    this._initPostForm();
-  }
-
-  get getPostForm() {
-    return this.my_new_post?.controls;
   }
 }
