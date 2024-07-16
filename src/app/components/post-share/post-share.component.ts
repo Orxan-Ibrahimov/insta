@@ -1,5 +1,12 @@
 import { isNull } from '@angular/compiler/src/output/output_ast';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -26,36 +33,44 @@ export class PostShareComponent implements OnInit {
     private jwtService: JwtService,
     private localeStorageService: LocaleStorageService,
     private usersService: UsersService,
-    private postService: PostService
+    private postService: PostService,
+    private ngZone: NgZone
   ) {}
-
-  imagePreviewSrc: string | ArrayBuffer | null | undefined = '';
+  videoPreviewSrc: string | ArrayBuffer | null;
+  imagePreviewSrc: any = [];
   isImageSelected: boolean = false;
+  isVideoSelected: boolean = false;
   me: User;
   desc;
   postFormData: FormData;
   i_can_not_share: boolean = true;
+  selectedFile;
   @Output() Posts = new EventEmitter<Post[]>();
 
   @Input() share_close: boolean;
   @Output() share_close_export = new EventEmitter<void>();
 
   onChangeImage(event: any) {
-    let selectedFile = (event.target as HTMLInputElement).files?.item(0);
-
-    if (selectedFile) {
+    this.selectedFile = (event.target as HTMLInputElement).files?.item(0);
+    if (this.selectedFile) {
       if (
-        ['image/jpeg', 'image/png', 'image/svg+xml'].includes(selectedFile.type)
+        ['image/jpeg', 'image/png', 'image/svg+xml'].includes(
+          this.selectedFile.type
+        )
       ) {
         let fileReader = new FileReader();
-        fileReader.readAsDataURL(selectedFile);
+        fileReader.readAsDataURL(this.selectedFile);
 
         fileReader.addEventListener('load', (event) => {
-          this.imagePreviewSrc = event.target?.result;
+          this.imagePreviewSrc.push({
+            url: event.target?.result,
+            width: '50%',
+          });
+
           this.isImageSelected = true;
         });
-        this.postFormData = new FormData();
-        this.postFormData.append('image', selectedFile);
+        // this.postFormData = new FormData();
+        this.postFormData.append('images', this.selectedFile);
         this.i_can_not_share = false;
       }
     } else {
@@ -63,7 +78,30 @@ export class PostShareComponent implements OnInit {
     }
   }
 
+  onChangeVideo(event: any) {
+    this.selectedFile = (event.target as HTMLInputElement).files?.item(0);
+
+    if (this.selectedFile) {
+      if (['video/mp4', 'video/ogg'].includes(this.selectedFile.type)) {
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(this.selectedFile);
+
+        fileReader.addEventListener('load', (event) => {
+          this.videoPreviewSrc = event.target?.result;
+          this.isVideoSelected = true;
+        });
+        this.postFormData.append('video', this.selectedFile);
+        this.i_can_not_share = false;
+      }
+    } else {
+      this.isVideoSelected = false;
+    }
+  }
+
   choseImage(element: any) {
+    element.click();
+  }
+  choseVideo(element: any) {
     element.click();
   }
 
@@ -91,12 +129,21 @@ export class PostShareComponent implements OnInit {
 
   closeImage() {
     this.isImageSelected = false;
-    this.postFormData.delete('image');
+    this.postFormData.delete('images');
+    this.imagePreviewSrc = [];
+    if (!this.desc) this.i_can_not_share = true;
+  }
+
+  closeVideo() {
+    this.isVideoSelected = false;
+    this.postFormData.delete('video');
+    this.videoPreviewSrc = null;
     if (!this.desc) this.i_can_not_share = true;
   }
 
   ngOnInit(): void {
     this.localeStorageService.me().subscribe((me) => {
+      this.postFormData = new FormData();
       this.me = me;
     });
   }

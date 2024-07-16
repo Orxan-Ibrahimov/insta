@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
 import { JwtService } from 'src/app/services/jwt.service';
 import { LocaleStorageService } from 'src/app/services/locale-storage.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-info-card',
@@ -13,12 +14,16 @@ import { LocaleStorageService } from 'src/app/services/locale-storage.service';
 export class InfoCardComponent implements OnInit {
   constructor(
     private authService: AuthService,
+    private actived_route: ActivatedRoute,
     private jwtService: JwtService,
     private localeStorageService: LocaleStorageService,
     private usersService: UsersService
   ) {}
   visible: boolean = false;
-  me: User;
+  // me: User;
+
+  spec_user;
+  is_me: boolean;
 
   showDialog() {
     this.visible = true;
@@ -32,11 +37,17 @@ export class InfoCardComponent implements OnInit {
   }
 
   RefreshedUser(data: User) {
-    this.me = data;
+    this.spec_user = data;
   }
   ngOnInit(): void {
     this.localeStorageService.me().subscribe((me) => {
-      this.me = me;
+      this.actived_route.params.subscribe((params) => {
+        this.usersService.getUserById(params['pid']).subscribe((user) => {
+          this.spec_user = user;
+          if (me === this.spec_user) this.is_me = true;
+          else this.is_me = false;
+        });
+      });
     });
   }
 }

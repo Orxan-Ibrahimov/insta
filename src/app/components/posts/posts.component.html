@@ -1,11 +1,31 @@
 <div class="post" *ngIf="Post">
-  <img *ngIf="Post.image" src="{{ Post.image }}" alt="post" />
+  <span> {{ Post?.description }}</span>
 
+  <!-- <img *ngIf="Post.image" src="{{ Post.image }}" alt="post" /> -->
+  <div class="post-images">
+    <img
+      *ngFor="let image of Post.images; let i = index"
+      [src]="image"
+      [ngStyle]="{
+        width:
+        Post.images.length == 1 ||
+          (Post.images.length % 2 == 1 && i == 0)
+            ? '100%'
+            : '50%'
+      }"
+      class="img-fluid rounded-start"
+      alt="preview"
+    />
+  </div>
   <div class="postReact">
     <button type="button" (click)="DoLike()">
       <img
-        src="../../../assets/img/{{ liked ? 'like.png' : 'notlike.png' }}"
-        alt="{{liked ? 'like' : 'notlike'}}"
+        [src]="
+          liked
+            ? '../../../assets/img/like.png'
+            : '../../../assets/img/notlike.png'
+        "
+        alt="{{ liked ? 'like' : 'notlike' }}"
       />
     </button>
     <img src="../../../assets/img/comment.png" alt="comment" />
@@ -18,6 +38,5 @@
     <span
       ><b>{{ Post?.name }}</b></span
     >
-    <span> {{ Post?.description }}</span>
   </div>
 </div>

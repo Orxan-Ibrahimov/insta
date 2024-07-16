@@ -37,10 +37,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-
-      &:hover {
-        cursor: pointer;
-      }
+      cursor: pointer;
 
       & > span {
         font-size: 12px;
@@ -55,6 +52,7 @@
     .disabled {
       pointer-events: none;
       opacity: 0.6;
+      cursor: none;
     }
 
     #photo {
@@ -81,9 +79,14 @@
     right: 1rem;
     cursor: pointer;
   }
-  & > img {
-    width: 100%;
-    object-fit: cover;
-    max-height: 20rem;
+  & > .post-images {
+    display: flex;
+    flex-wrap: wrap;
+    & > img {
+      // width: 100%;
+      display: inline-block;
+      object-fit: cover;
+      max-height: 20rem;
+    }
   }
 }

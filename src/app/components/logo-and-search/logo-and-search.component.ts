@@ -23,7 +23,7 @@ export class LogoAndSearchComponent implements OnInit {
      if(this.search){
       this.searching_users = all_users.filter((user) =>
         user.nickname.includes(this.search)
-      );
+      ).slice(0,5);
      }
      else this.searching_users = [];
 
@@ -33,5 +33,6 @@ export class LogoAndSearchComponent implements OnInit {
     this.localeStorageService.me().subscribe((me) => {
       this.me = me;
     });
+
   }
 }

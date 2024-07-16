@@ -10,7 +10,7 @@ import { AuthModule } from './components/auth/auth.module';
 const routes: Routes = [
   { path: 'auth', component: AuthComponent},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]  },
-  { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuardService] },
+  { path: 'profile/:pid', component: ProfilePageComponent, canActivate: [AuthGuardService] },
   { path: '**', redirectTo: 'auth' }
 ];
 

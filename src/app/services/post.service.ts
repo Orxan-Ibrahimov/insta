@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Post } from '../models/postData';
 
@@ -12,6 +12,12 @@ import { Post } from '../models/postData';
 export class PostService {
 
   constructor(private http:HttpClient) { }
+  public dataSubject = new BehaviorSubject<Post>(this.getPosts[0]);
+  currentData = this.dataSubject.asObservable();
+
+  changeData(post: Post) {
+    this.dataSubject.next(post);
+  }
 
   ApiUrl = environment.API_URL + 'posts';
 

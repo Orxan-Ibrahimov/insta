@@ -5,7 +5,8 @@ export interface Post{
     id:string;
     name?:string;
     description?:string;
-    image?:string;
+    images?:string[];
+    video?:string;
     likes?:Like[];
     liked?:boolean;    
     user:User;    

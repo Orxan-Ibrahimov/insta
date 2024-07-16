@@ -13,5 +13,7 @@ export interface User {
   cover?:string;
   status?:string;
   posts?:Post[],
-  citizenship?:Citizenship
+  citizenship?:Citizenship,
+  followers?:User[],
+  followings?:User[]
 }

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user';
-import { JwtService } from 'src/app/services/jwt.service';
-import { LocaleStorageService } from 'src/app/services/locale-storage.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -11,11 +10,20 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class ProfilePageComponent implements OnInit {
   constructor(
-   
+   private actived_router:ActivatedRoute,
+   private user_serveices:UsersService
   ) {}
+
+  spec_user:User;
 
   isProfile: boolean = true;
   ngOnInit(): void {
-   
+    // this.actived_router.params.subscribe((params) => {      
+    //   this.user_serveices.getUserById(params['pid']).subscribe((user) => {
+    //     this.spec_user = user;
+    //     console.log(this.spec_user.posts);
+        
+    //   });  
+    // });
   }
 }

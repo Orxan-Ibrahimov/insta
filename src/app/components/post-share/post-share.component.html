@@ -1,7 +1,6 @@
-<form #form="ngForm" class="postShare" >
+<form #form="ngForm" class="postShare">
   <img src="../../../assets/img/profileImg.jpg" alt="profile" />
   <div>
-
     <input
       type="text"
       pInputText
@@ -10,19 +9,25 @@
       [(ngModel)]="desc"
     />
     <div class="postOptions">
-      <a class="option" id="photo" (click)="choseImage(okus)">
+      <a class="option" id="photo" [ngClass]="isVideoSelected?'disabled': null" id="video" (click)="choseImage(okus)">
         <i class="pi pi-image"></i> <span> Photo</span>
       </a>
-      <div class="option" id="video">
+      <a class="option" [ngClass]="isImageSelected?'disabled': null" id="video" (click)="choseVideo(insta_video)">
         <i class="pi pi-video"></i> <span> Video</span>
-      </div>
+      </a>
       <div class="option" id="location">
         <i class="pi pi-map-marker"></i> <span> Location</span>
       </div>
       <div class="option" id="shedule">
         <i class="pi pi-calendar"></i> <span> Shedule</span>
       </div>
-      <button (click)="SendPost()" [ngClass]="{'disabled':i_can_not_share}" class="button post-button">Share</button>
+      <button
+        (click)="SendPost()"
+        [ngClass]="{ disabled: i_can_not_share }"
+        class="button post-button"
+      >
+        Share
+      </button>
 
       <div style="display: none">
         <input
@@ -33,15 +38,53 @@
           (change)="onChangeImage($event)"
         />
       </div>
+
+      <div style="display: none">
+        <input
+          #insta_video
+          type="file"
+          accept="video/*"
+          class="p-inputtext"
+          (change)="onChangeVideo($event)"
+        />
+      </div>
     </div>
 
     <div class="previewImage" *ngIf="isImageSelected">
       <i class="pi pi-times" (click)="closeImage()"></i>
-      <img
-        [src]="imagePreviewSrc"
-        class="img-fluid rounded-start"
-        alt="preview"
-      />
+      <div class="post-images">
+        <img
+          *ngFor="let image of imagePreviewSrc; let i = index"
+          [src]="image.url"
+          [ngStyle]="{
+            width:
+              imagePreviewSrc.length == 1 ||
+              (imagePreviewSrc.length % 2 == 1 && i == 0)
+                ? '100%'
+                : '50%'
+          }"
+          class="img-fluid rounded-start"
+          alt="preview"
+        />
+      </div>
+    </div>
+
+    <div class="previewVideo" *ngIf="isVideoSelected">
+      <i class="pi pi-times" (click)="closeVideo()"></i>
+      <div class="post-videos">
+        <video width="640" height="360" controls poster>
+          <source [src]="videoPreviewSrc" type="video/mp4">
+          <source [src]="videoPreviewSrc" type="video/ogg">
+          Your browser does not support the video tag.
+        </video>
+        
+        <!-- <img
+          
+          width="100%"
+          class="img-fluid rounded-start"
+          alt="preview"
+        /> -->
+      </div>
     </div>
   </div>
 </form>

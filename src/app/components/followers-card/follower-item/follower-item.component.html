@@ -6,6 +6,7 @@
             <span>{{follower.last_name}}</span>
         </div>
     </div>
-    <button *ngIf="me.id != follower.id" class="button follower-button">Follow</button>
-    <p *ngIf="me.id === follower.id" class="me">me</p>
+    <button *ngIf="me?.id != follower?.id && !followed" class="button follower-button" (click)="Follow()">Follow</button>
+    <p *ngIf="me?.id === follower?.id" class="me">me</p>
+    <p *ngIf="followed" class="me">following</p>
 </div>
