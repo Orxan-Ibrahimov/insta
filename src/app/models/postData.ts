@@ -9,5 +9,6 @@ export interface Post{
     video?:string;
     likes?:Like[];
     liked?:boolean;    
-    user:User;    
+    user:User;  
+    created_at:Date; 
 }

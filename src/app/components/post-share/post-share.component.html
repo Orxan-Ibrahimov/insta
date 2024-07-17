@@ -9,10 +9,21 @@
       [(ngModel)]="desc"
     />
     <div class="postOptions">
-      <a class="option" id="photo" [ngClass]="isVideoSelected?'disabled': null" id="video" (click)="choseImage(okus)">
+      <a
+        class="option"
+        id="photo"
+        [ngClass]="isVideoSelected ? 'disabled' : null"
+        id="video"
+        (click)="choseImage(okus)"
+      >
         <i class="pi pi-image"></i> <span> Photo</span>
       </a>
-      <a class="option" [ngClass]="isImageSelected?'disabled': null" id="video" (click)="choseVideo(insta_video)">
+      <a
+        class="option"
+        [ngClass]="isImageSelected ? 'disabled' : null"
+        id="video"
+        (click)="choseVideo(insta_video)"
+      >
         <i class="pi pi-video"></i> <span> Video</span>
       </a>
       <div class="option" id="location">
@@ -51,11 +62,13 @@
     </div>
 
     <div class="previewImage" *ngIf="isImageSelected">
-      <i class="pi pi-times" (click)="closeImage()"></i>
+      <button class="close-file">
+        <i class="pi pi-times" (click)="closeImage()"></i>
+      </button>
       <div class="post-images">
         <img
           *ngFor="let image of imagePreviewSrc; let i = index"
-          [src]="image.url"
+          [src]="image"
           [ngStyle]="{
             width:
               imagePreviewSrc.length == 1 ||
@@ -70,20 +83,15 @@
     </div>
 
     <div class="previewVideo" *ngIf="isVideoSelected">
-      <i class="pi pi-times" (click)="closeVideo()"></i>
+      <button class="close-file">
+        <i class="pi pi-times" (click)="closeVideo()"></i>
+      </button>
       <div class="post-videos">
-        <video width="640" height="360" controls poster>
-          <source [src]="videoPreviewSrc" type="video/mp4">
-          <source [src]="videoPreviewSrc" type="video/ogg">
+        <video width="100%" controls poster>
+          <source [src]="videoPreviewSrc" type="video/mp4" />
+          <source [src]="videoPreviewSrc" type="video/ogg" />
           Your browser does not support the video tag.
         </video>
-        
-        <!-- <img
-          
-          width="100%"
-          class="img-fluid rounded-start"
-          alt="preview"
-        /> -->
       </div>
     </div>
   </div>

@@ -12,17 +12,16 @@ import { Post } from '../models/postData';
 export class PostService {
 
   constructor(private http:HttpClient) { }
-  public dataSubject = new BehaviorSubject<Post>(this.getPosts[0]);
-  currentData = this.dataSubject.asObservable();
+  private dataSubject: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([]);
+  data$: Observable<Post[]> = this.dataSubject.asObservable();
 
-  changeData(post: Post) {
-    this.dataSubject.next(post);
+  updateData(newData: Post[]) {
+    this.dataSubject.next(newData);
   }
-
   ApiUrl = environment.API_URL + 'posts';
 
   getPosts():Observable<Post[]>{    
-    return this.http.get<Post[]>(this.ApiUrl);
+    return this.http.get<Post[]>(this.ApiUrl).pipe();
   }
 
   // getUsersCount():Observable<number>{

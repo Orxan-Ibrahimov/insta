@@ -1,8 +1,7 @@
 <div class="post" *ngIf="Post">
   <span> {{ Post?.description }}</span>
 
-  <!-- <img *ngIf="Post.image" src="{{ Post.image }}" alt="post" /> -->
-  <div class="post-images">
+  <div class="post-images" *ngIf="Post.images.length > 0">
     <img
       *ngFor="let image of Post.images; let i = index"
       [src]="image"
@@ -16,6 +15,14 @@
       class="img-fluid rounded-start"
       alt="preview"
     />
+  </div>
+  <div class="post-videos" *ngIf="Post.video">
+    <video width="640" height="360" controls poster>
+      <source [src]="Post.video" type="video/mp4">
+      <source [src]="Post.video" type="video/ogg">
+      Your browser does not support the video tag.
+    </video>
+  
   </div>
   <div class="postReact">
     <button type="button" (click)="DoLike()">

@@ -21,6 +21,7 @@
     "bootstrap": "^5.3.3",
     "environment": "^1.1.0",
     "jwt-decode": "^4.0.0",
+    "moment-timezone": "^0.5.45",
     "primeflex": "^3.2.1",
     "primeicons": "^5.0.0",
     "primeng": "^13.4.1",

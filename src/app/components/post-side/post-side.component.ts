@@ -27,7 +27,7 @@ export class PostSideComponent implements OnInit {
 
   PostRefreshed() {
     this.postService.getPosts().subscribe((updated_posts) => {
-      this.special_posts = updated_posts;
+      this.special_posts = updated_posts.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
     });
   }
 
@@ -39,7 +39,9 @@ export class PostSideComponent implements OnInit {
       this.me = me;
     });
     this.postService.getPosts().subscribe((posts) => {
-      this.special_posts = posts;
+      console.log(posts);
+      
+      this.special_posts = posts.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
     });
   }
 }

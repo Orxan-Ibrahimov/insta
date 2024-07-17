@@ -70,11 +70,14 @@
   }
 }
 
-.previewImage {
+.previewImage, .previewVideo {
   position: relative;
 
-  & > i {
+  & > .close-file {
     position: absolute;
+    z-index: 1;
+    color: var(--black);
+    background-color: var(--cardColor);
     top: 0.5rem;
     right: 1rem;
     cursor: pointer;
@@ -83,7 +86,6 @@
     display: flex;
     flex-wrap: wrap;
     & > img {
-      // width: 100%;
       display: inline-block;
       object-fit: cover;
       max-height: 20rem;

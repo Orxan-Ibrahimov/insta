@@ -62,10 +62,7 @@ export class PostShareComponent implements OnInit {
         fileReader.readAsDataURL(this.selectedFile);
 
         fileReader.addEventListener('load', (event) => {
-          this.imagePreviewSrc.push({
-            url: event.target?.result,
-            width: '50%',
-          });
+          this.imagePreviewSrc.push(event.target?.result,);
 
           this.isImageSelected = true;
         });
@@ -106,6 +103,8 @@ export class PostShareComponent implements OnInit {
   }
 
   SendPost() {
+    console.log(this.me);
+    
     if (this.desc) {
       if (!this.postFormData) this.postFormData = new FormData();
 
@@ -115,10 +114,13 @@ export class PostShareComponent implements OnInit {
         (addedPost) => {
           this.desc = '';
           this.closeImage();
+          this.closeVideo();
           this.Posts.emit();
 
           this.share_close = false;
           this.share_close_export.emit();
+          this.postFormData = new FormData();
+
         },
         (err) => {
           console.log(err);
