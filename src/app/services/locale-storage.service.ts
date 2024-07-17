@@ -13,7 +13,8 @@ export class LocaleStorageService {
     private usersService: UsersService,
     private jwtService: JwtService
   ) {
-    this.me().subscribe((me) => {
+    this.me$.subscribe((me) => {
+      if(me)
       this.me_subject.next(me);
     });
   }

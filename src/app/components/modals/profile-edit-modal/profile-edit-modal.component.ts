@@ -24,8 +24,6 @@ export class ProfileEditModalComponent implements OnInit {
   @Input('is_visible') visible: boolean = false;
   @Output() not_visible = new EventEmitter<void>();
 
-  // @Output() updated_user = new EventEmitter<User>();
-
   me: User = {
     first_name: '',
     last_name: '',
@@ -98,12 +96,11 @@ export class ProfileEditModalComponent implements OnInit {
           this.localeStorageService.me$.subscribe((users) => {
             this.localeStorageService.updateData(updatedUser);
           });
-          // this.updated_user.emit(updatedUser);
         });
     }
   }
   ngOnInit(): void {
-    this.localeStorageService.me().subscribe((me) => {
+    this.localeStorageService.me$.subscribe((me) => {
       this.me = me;
       this.selectedCitizenship = this.me?.citizenship.fullname;
       this.citizenshipsService.get().subscribe((cs: Citizenship[]) => {

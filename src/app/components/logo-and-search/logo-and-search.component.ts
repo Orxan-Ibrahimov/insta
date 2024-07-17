@@ -30,7 +30,7 @@ export class LogoAndSearchComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.localeStorageService.me().subscribe((me) => {
+    this.localeStorageService.me$.subscribe((me) => {
       this.me = me;
     });
 

@@ -30,7 +30,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     // this.refresh_like_id(this.Post.likes);
-    this.localeStorageService.me().subscribe((me) => {
+    this.localeStorageService.me$.subscribe((me) => {
       this.me = me;
       this.refresh_like_id(this.Post.likes);
     });    

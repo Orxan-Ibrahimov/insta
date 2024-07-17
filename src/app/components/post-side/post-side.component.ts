@@ -35,7 +35,7 @@ export class PostSideComponent implements OnInit {
    
   ngOnInit(): void {
     
-    this.localeStorageService.me().subscribe((me) => {
+    this.localeStorageService.me$.subscribe((me) => {
       this.me = me;
     });
     this.postService.getPosts().subscribe((posts) => {

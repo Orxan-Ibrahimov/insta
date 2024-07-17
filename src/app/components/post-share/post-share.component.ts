@@ -44,7 +44,6 @@ export class PostShareComponent implements OnInit {
   postFormData: FormData;
   i_can_not_share: boolean = true;
   selectedFile;
-  // @Output() Posts = new EventEmitter<Post[]>();
 
   @Input() share_close: boolean;
   @Output() share_close_export = new EventEmitter<void>();
@@ -119,8 +118,6 @@ export class PostShareComponent implements OnInit {
             });
           });
 
-          // this.Posts.emit();
-
           this.share_close = false;
           this.share_close_export.emit();
           this.postFormData = new FormData();
@@ -147,7 +144,7 @@ export class PostShareComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.localeStorageService.me().subscribe((me) => {
+    this.localeStorageService.me$.subscribe((me) => {
       this.postFormData = new FormData();
       this.me = me;
     });
