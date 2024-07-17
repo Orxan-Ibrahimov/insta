@@ -1,7 +1,7 @@
 <div class="info-card">
   <div class="info-header">
     <h4>{{is_me ? 'Your': spec_user?.nickname + "'s"}} Info</h4>
-    <span class="info-edit-icon" *ngIf="is_me" (click)="showDialog()">
+    <span class="info-edit-icon" *ngIf="!is_me" (click)="showDialog()">
       <i class="pi pi-user-edit"></i>
     </span>
   </div>
@@ -25,8 +25,8 @@
   </div>
 
   <div class="info-footer">
-    <button type="button" *ngIf="is_me" class="button logout-button" (click)="LogOut()">LogOut</button>
+    <button type="button" *ngIf="!is_me" class="button logout-button" (click)="LogOut()">LogOut</button>
   </div>
 </div>
 
-<app-profile-edit-modal [is_visible]="visible" (updated_user)="RefreshedUser($event)" (not_visible)="onModalClosed()"></app-profile-edit-modal>
+<app-profile-edit-modal [is_visible]="visible" (not_visible)="onModalClosed()"></app-profile-edit-modal>

@@ -11,7 +11,11 @@ import { Post } from '../models/postData';
 })
 export class PostService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+    this.getPosts().subscribe((data) => {
+      this.dataSubject.next(data);
+    });
+   }
   private dataSubject: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([]);
   data$: Observable<Post[]> = this.dataSubject.asObservable();
 

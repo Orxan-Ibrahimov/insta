@@ -25,11 +25,11 @@ export class PostSideComponent implements OnInit {
   me: User;
   special_posts:Post[];
 
-  PostRefreshed() {
-    this.postService.getPosts().subscribe((updated_posts) => {
-      this.special_posts = updated_posts.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
-    });
-  }
+  // PostRefreshed() {
+  //   this.postService.getPosts().subscribe((updated_posts) => {
+  //     this.special_posts = updated_posts.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
+  //   });
+  // }
 
 
    
@@ -41,7 +41,10 @@ export class PostSideComponent implements OnInit {
     this.postService.getPosts().subscribe((posts) => {
       console.log(posts);
       
-      this.special_posts = posts.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
+      this.postService.data$.subscribe((data) => {
+        this.special_posts = data.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
+      });
+      // this.special_posts = posts.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
     });
   }
 }

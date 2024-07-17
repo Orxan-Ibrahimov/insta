@@ -1,5 +1,5 @@
 <app-profile-card *ngIf="myProfile"></app-profile-card>
 <div class="postSide">
-    <app-post-share (Posts)="PostRefreshed()"></app-post-share>
-    <app-posts *ngFor="let Post of special_posts" (Posts)="PostRefreshed()" [Post]="Post"></app-posts>
+    <app-post-share></app-post-share>
+    <app-posts *ngFor="let Post of special_posts"  [Post]="Post"></app-posts>
 </div>

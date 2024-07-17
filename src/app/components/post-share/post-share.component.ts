@@ -33,8 +33,7 @@ export class PostShareComponent implements OnInit {
     private jwtService: JwtService,
     private localeStorageService: LocaleStorageService,
     private usersService: UsersService,
-    private postService: PostService,
-    private ngZone: NgZone
+    private postService: PostService
   ) {}
   videoPreviewSrc: string | ArrayBuffer | null;
   imagePreviewSrc: any = [];
@@ -45,7 +44,7 @@ export class PostShareComponent implements OnInit {
   postFormData: FormData;
   i_can_not_share: boolean = true;
   selectedFile;
-  @Output() Posts = new EventEmitter<Post[]>();
+  // @Output() Posts = new EventEmitter<Post[]>();
 
   @Input() share_close: boolean;
   @Output() share_close_export = new EventEmitter<void>();
@@ -62,7 +61,7 @@ export class PostShareComponent implements OnInit {
         fileReader.readAsDataURL(this.selectedFile);
 
         fileReader.addEventListener('load', (event) => {
-          this.imagePreviewSrc.push(event.target?.result,);
+          this.imagePreviewSrc.push(event.target?.result);
 
           this.isImageSelected = true;
         });
@@ -103,8 +102,6 @@ export class PostShareComponent implements OnInit {
   }
 
   SendPost() {
-    console.log(this.me);
-    
     if (this.desc) {
       if (!this.postFormData) this.postFormData = new FormData();
 
@@ -115,12 +112,18 @@ export class PostShareComponent implements OnInit {
           this.desc = '';
           this.closeImage();
           this.closeVideo();
-          this.Posts.emit();
+          this.postService.getPosts().subscribe((posts) => {
+            this.postService.updateData(posts);
+            this.localeStorageService.me().subscribe((me) => {
+              this.localeStorageService.updateData(me);
+            });
+          });
+
+          // this.Posts.emit();
 
           this.share_close = false;
           this.share_close_export.emit();
           this.postFormData = new FormData();
-
         },
         (err) => {
           console.log(err);

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { UsersService } from './users.service';
 import { JwtService } from './jwt.service';
+import { User } from '../models/user';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +12,18 @@ export class LocaleStorageService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService
-  ) {}
+  ) {
+    this.me().subscribe((me) => {
+      this.me_subject.next(me);
+    });
+  }
 
+  private me_subject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  me$: Observable<User> = this.me_subject.asObservable();
+
+  updateData(me: User) {
+    this.me_subject.next(me);
+  }
   tokenName = 'token';
 
   getItem() {

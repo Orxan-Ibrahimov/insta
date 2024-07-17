@@ -13,6 +13,13 @@ export class UsersService {
 
   constructor(private http:HttpClient) { }
 
+  private userSubject: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  data$: Observable<User[]> = this.userSubject.asObservable();
+
+  updateData(new_user: User[]) {
+    this.userSubject.next(new_user);
+  }
+
   ApiUrl = environment.API_URL + 'users';
 
   getUsers():Observable<User[]>{

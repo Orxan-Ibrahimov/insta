@@ -24,7 +24,7 @@ export class ProfileEditModalComponent implements OnInit {
   @Input('is_visible') visible: boolean = false;
   @Output() not_visible = new EventEmitter<void>();
 
-  @Output() updated_user = new EventEmitter<User>();
+  // @Output() updated_user = new EventEmitter<User>();
 
   me: User = {
     first_name: '',
@@ -95,7 +95,10 @@ export class ProfileEditModalComponent implements OnInit {
         .subscribe((updatedUser) => {
           this.visible = false;
           this.not_visible.emit();
-          this.updated_user.emit(updatedUser);
+          this.localeStorageService.me$.subscribe((users) => {
+            this.localeStorageService.updateData(updatedUser);
+          });
+          // this.updated_user.emit(updatedUser);
         });
     }
   }
