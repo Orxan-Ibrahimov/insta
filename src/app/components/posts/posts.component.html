@@ -7,8 +7,7 @@
       [src]="image"
       [ngStyle]="{
         width:
-        Post.images.length == 1 ||
-          (Post.images.length % 2 == 1 && i == 0)
+          Post.images.length == 1 || (Post.images.length % 2 == 1 && i == 0)
             ? '100%'
             : '50%'
       }"
@@ -18,11 +17,10 @@
   </div>
   <div class="post-videos" *ngIf="Post.video">
     <video width="640" height="360" controls poster>
-      <source [src]="Post.video" type="video/mp4">
-      <source [src]="Post.video" type="video/ogg">
+      <source [src]="Post.video" type="video/mp4" />
+      <source [src]="Post.video" type="video/ogg" />
       Your browser does not support the video tag.
     </video>
-  
   </div>
   <div class="postReact">
     <button type="button" (click)="DoLike()">
@@ -35,7 +33,9 @@
         alt="{{ liked ? 'like' : 'notlike' }}"
       />
     </button>
-    <img src="../../../assets/img/comment.png" alt="comment" />
+    <button type="button" (click)="OpenComments()">
+      <img src="../../../assets/img/comment.png" alt="comment" />
+    </button>
     <img src="../../../assets/img/share.png" alt="share" />
   </div>
 
@@ -46,4 +46,6 @@
       ><b>{{ Post?.name }}</b></span
     >
   </div>
+
+  <app-comments *ngIf="comment_visible"></app-comments>
 </div>

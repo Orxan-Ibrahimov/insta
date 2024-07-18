@@ -1,0 +1,22 @@
+<div class="commentary">
+  <div class="commentary-header">
+    <img
+      [src]="post_message.user?.profile"
+      class="commentary-image"
+      alt="profile"
+    />
+  </div>
+  <div class="commentary-body">
+    <div class="message-box">
+      <a href="/profile/{{post_message.user?.id}}" class="user">{{ post_message.user?.nickname }}</a>
+      <p class="message">
+        {{ post_message.message }}
+      </p>
+    </div>
+    <div class="message-details">
+        <a href="" class="message-detail">3 gun</a>
+        <a href="" class="message-detail bold-message">Beyen</a>
+        <a href="" class="message-detail bold-message">Cavab yaz</a>
+    </div>
+  </div>
+</div>

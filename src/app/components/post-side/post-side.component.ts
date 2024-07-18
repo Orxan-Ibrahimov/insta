@@ -24,27 +24,16 @@ export class PostSideComponent implements OnInit {
   @Input('profilePage') myProfile: boolean;
   me: User;
   special_posts:Post[];
-
-  // PostRefreshed() {
-  //   this.postService.getPosts().subscribe((updated_posts) => {
-  //     this.special_posts = updated_posts.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
-  //   });
-  // }
-
-
    
   ngOnInit(): void {
     
     this.localeStorageService.me$.subscribe((me) => {
       this.me = me;
     });
-    this.postService.getPosts().subscribe((posts) => {
-      console.log(posts);
-      
+    this.postService.getPosts().subscribe((posts) => {      
       this.postService.data$.subscribe((data) => {
         this.special_posts = data.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
       });
-      // this.special_posts = posts.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
     });
   }
 }

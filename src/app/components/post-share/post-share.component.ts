@@ -64,7 +64,6 @@ export class PostShareComponent implements OnInit {
 
           this.isImageSelected = true;
         });
-        // this.postFormData = new FormData();
         this.postFormData.append('images', this.selectedFile);
         this.i_can_not_share = false;
       }
@@ -103,7 +102,7 @@ export class PostShareComponent implements OnInit {
   SendPost() {
     if (this.desc) {
       if (!this.postFormData) this.postFormData = new FormData();
-
+      
       this.postFormData.append('user', this.me.id);
       this.postFormData.append('description', this.desc);
       this.postService.addPost(this.postFormData).subscribe(

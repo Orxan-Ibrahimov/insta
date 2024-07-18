@@ -24,29 +24,26 @@ export class PostsComponent implements OnInit {
   @Input() Post: Post | undefined;
 
   me: User;
-
+  comment_visible: boolean;
   like_id: string;
   liked: boolean;
 
   ngOnInit(): void {
-    // this.refresh_like_id(this.Post.likes);
     this.localeStorageService.me$.subscribe((me) => {
       this.me = me;
       this.refresh_like_id(this.Post.likes);
-    });    
+    });
   }
 
   DoLike() {
     if (this.liked) {
       this.likeService.delete(this.like_id).subscribe((deletedLike) => {
         this.liked = false;
-        // this.refresh_like_id(this.Post.likes);
         this.postService.getPostById(this.Post.id).subscribe((p) => {
           this.Post = p;
         });
       });
     } else {
-
       const like: Like = {
         who_likes: this.me,
         post: this.Post,
@@ -63,10 +60,14 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  refresh_like_id(likes: Like[]) {
+  OpenComments() {
+    this.comment_visible = !this.comment_visible;
+    this.postService.update_current_post(this.Post);
+  }
 
+  refresh_like_id(likes: Like[]) {
     likes.forEach((like) => {
-      if (like.who_likes.id == this.me.id) {
+      if (like.who_likes.id == this.me?.id) {
         this.liked = true;
         this.like_id = like.id;
         return;

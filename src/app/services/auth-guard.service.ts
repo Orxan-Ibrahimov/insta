@@ -12,9 +12,7 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
    boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const token = this.tokenStorage.getItem()?.split('.')[1];
-  console.log("token",token);
-  
+  const token = this.tokenStorage.getItem()?.split('.')[1];  
   
     if(token)  {
       const tokenData = JSON.parse(atob(token));

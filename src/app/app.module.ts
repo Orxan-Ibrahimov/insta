@@ -31,6 +31,9 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './components/auth/auth.module';
 import { FollowerItemComponent } from './components/followers-card/follower-item/follower-item.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { CommentItemComponent } from './components/comments/comment-item/comment-item.component';
+import { MakeCommentComponent } from './components/comments/make-comment/make-comment.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,9 @@ import { FollowerItemComponent } from './components/followers-card/follower-item
     PostModalComponent,
     ProfileEditModalComponent,
     FollowerItemComponent,
+    CommentsComponent,
+    CommentItemComponent,
+    MakeCommentComponent
     
   ],
   imports: [

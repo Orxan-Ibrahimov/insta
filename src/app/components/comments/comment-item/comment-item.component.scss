@@ -1,0 +1,47 @@
+.commentary {
+  display: flex;
+  gap: 1rem;
+  & > .commentary-header {
+    & > .commentary-image {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+  & > .commentary-body {
+    width: 100%;
+    & > .message-box {
+      max-width: 80%;
+      word-wrap: break-word;
+      padding: 1rem;
+      border-radius: 1rem;
+      background-color: var(--comment_bakcground);
+
+      & > .message{
+        color: var(--black);
+      }
+      & > .user {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--black);
+      }
+    }
+
+    & > .message-details {
+      & > .message-detail {
+        color: var(--black);
+        font-size: 12px;
+        margin: 0.5rem;
+        transition: .5s color;
+        &:hover {
+          color: var(--orange);
+        }
+      }
+
+      & > .bold-message {
+        font-weight: 700;
+      }
+    }
+  }
+}

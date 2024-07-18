@@ -1,0 +1,49 @@
+<div class="comment">
+  <div class="comment-header">
+    <img
+      src="../../../../assets/img/postpic3.JPG"
+      class="comment-image"
+      alt="profile"
+    />
+  </div>
+  <div class="comment-body">
+    <label for="make-comment" class="comment-box">
+      <textarea [(ngModel)]="message" id="make-comment" class="comment-input"></textarea>
+      <ul class="comment-icon-list">
+        <li class="comment-icon-list-item">
+          <button type="button" class="comment-icon-btn">
+            <img src="../../../../assets/img/003-hacker.png" class="comment-icon" alt="comment-icon" />
+          </button>
+        </li>
+        <li class="comment-icon-list-item">
+          <button type="button" class="comment-icon-btn">
+            <img src="../../../../assets/img/002-happy.png" class="comment-icon" alt="comment-icon" />
+          </button>
+        </li>
+        <li class="comment-icon-list-item">
+          <button type="button" class="comment-icon-btn">
+            <img src="../../../../assets/img/005-camera.png" class="comment-icon" alt="comment-icon" />
+          </button>
+        </li>
+        <li class="comment-icon-list-item">
+          <button type="button" class="comment-icon-btn">
+            <img src="../../../../assets/img/001-gif.png" class="comment-icon" alt="comment-icon" />
+          </button>
+        </li>
+        <li class="comment-icon-list-item">
+          <button type="button" class="comment-icon-btn">
+            <img src="../../../../assets/img/004-sticker.png" class="comment-icon" alt="comment-icon" />
+          </button>
+        </li>
+
+        <li class="comment-icon-list-item comment-icon-list-item-end">
+          <button type="button" class="comment-icon-btn" [ngClass]="{'disabled':!message}" (click)="SendMessage()">
+            <span  class="comment-icon" id="comment-send">
+              <i class="fa-brands fa-google-play"></i>
+            </span>
+          </button>
+        </li>
+      </ul>
+    </label>
+  </div>
+</div>
