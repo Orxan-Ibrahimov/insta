@@ -24,7 +24,7 @@ export class PostsComponent implements OnInit {
   @Input() Post: Post | undefined;
 
   me: User;
-  comment_visible: boolean;
+  // comment_visible: boolean;
   like_id: string;
   liked: boolean;
 
@@ -61,7 +61,9 @@ export class PostsComponent implements OnInit {
   }
 
   OpenComments() {
-    this.comment_visible = !this.comment_visible;
+    console.log(this.Post);
+    
+    this.Post.read_comments = !this.Post.read_comments;
     this.postService.update_current_post(this.Post);
   }
 

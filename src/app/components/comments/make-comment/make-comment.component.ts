@@ -35,13 +35,19 @@ export class MakeCommentComponent implements OnInit {
     });
     this.ms.append('message', this.message);
     this.ms.append('post', this.current_post.id);
-    this.messageService.addMessage(this.ms).subscribe((added_message) => {
-      this.messageService.getMessages().subscribe((messages) => {
-        this.messageService.updateData(messages);
-        this.ms = new FormData();
-        this.ms.append('user', this.me.id);
-        this.message = '';
-      });
-    });
+    this.messageService.addMessage(this.ms).subscribe(
+      (added_message) => {
+        console.log('cp',this.current_post);
+        
+        this.messageService.getMessageById(added_message.id).subscribe(message => {
+          this.current_post.messages.push(message);
+          this.postService.update_current_post(this.current_post);
+          this.ms = new FormData();
+          this.ms.append('user', this.me.id);
+          this.message = '';
+        });
+       
+      }
+    );
   }
 }

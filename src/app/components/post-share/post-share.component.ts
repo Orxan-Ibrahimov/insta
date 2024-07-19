@@ -120,9 +120,6 @@ export class PostShareComponent implements OnInit {
           this.share_close = false;
           this.share_close_export.emit();
           this.postFormData = new FormData();
-        },
-        (err) => {
-          console.log(err);
         }
       );
     }

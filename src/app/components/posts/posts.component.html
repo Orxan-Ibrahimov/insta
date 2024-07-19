@@ -47,5 +47,5 @@
     >
   </div>
 
-  <app-comments *ngIf="comment_visible"></app-comments>
+  <app-comments *ngIf="Post.read_comments" [current_post]="Post"></app-comments>
 </div>

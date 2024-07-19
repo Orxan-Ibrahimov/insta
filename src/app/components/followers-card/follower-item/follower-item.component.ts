@@ -33,7 +33,7 @@ export class FollowerItemComponent implements OnInit {
     this.localeStorageService.me$.subscribe((me) => {
       this.me = me;      
       this.me.followers.filter((follower) => {
-        if (follower.id === this.follower.id) this.followed = true;
+        if (follower?.id === this.follower?.id) this.followed = true;
       });
     });
   }
