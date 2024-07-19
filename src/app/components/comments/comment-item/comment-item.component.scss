@@ -18,7 +18,7 @@
       border-radius: 1rem;
       background-color: var(--comment_bakcground);
 
-      & > .message{
+      & > .message {
         color: var(--black);
       }
       & > .user {
@@ -28,12 +28,18 @@
       }
     }
 
+    & > img {
+      width: 30%;
+      border-radius: 1rem;
+      margin-top: .5rem;
+    }
+
     & > .message-details {
       & > .message-detail {
         color: var(--black);
         font-size: 12px;
         margin: 0.5rem;
-        transition: .5s color;
+        transition: 0.5s color;
         &:hover {
           color: var(--orange);
         }

@@ -8,42 +8,98 @@
   </div>
   <div class="comment-body">
     <label for="make-comment" class="comment-box">
-      <textarea [(ngModel)]="message" id="make-comment" class="comment-input"></textarea>
+      <textarea
+        [(ngModel)]="message"
+        id="make-comment"
+        class="comment-input"
+      ></textarea>
       <ul class="comment-icon-list">
         <li class="comment-icon-list-item">
-          <button type="button" class="comment-icon-btn">
-            <img src="../../../../assets/img/003-hacker.png" class="comment-icon" alt="comment-icon" />
+          <button type="button" class="comment-icon-btn" *ngIf="!isImageSelected">
+            <img
+              src="../../../../assets/img/003-hacker.png"
+              class="comment-icon"
+              alt="comment-icon"
+            />
           </button>
         </li>
         <li class="comment-icon-list-item">
           <button type="button" class="comment-icon-btn">
-            <img src="../../../../assets/img/002-happy.png" class="comment-icon" alt="comment-icon" />
+            <img
+              src="../../../../assets/img/002-happy.png"
+              class="comment-icon"
+              alt="comment-icon"
+            />
           </button>
         </li>
         <li class="comment-icon-list-item">
-          <button type="button" class="comment-icon-btn">
-            <img src="../../../../assets/img/005-camera.png" class="comment-icon" alt="comment-icon" />
+          <div style="display: none">
+            <input
+              #image
+              type="file"
+              accept="image/*"
+              class="p-inputtext"
+              (change)="onChangeImage($event)"
+            />
+          </div>
+          <button
+            type="button"
+            class="comment-icon-btn"
+            *ngIf="!isImageSelected"
+            (click)="choseImage(image)"
+            id="photo"
+          >
+            <img
+              src="../../../../assets/img/005-camera.png"
+              class="comment-icon"
+              alt="comment-icon"
+            />
           </button>
         </li>
         <li class="comment-icon-list-item">
-          <button type="button" class="comment-icon-btn">
-            <img src="../../../../assets/img/001-gif.png" class="comment-icon" alt="comment-icon" />
+          <button type="button" class="comment-icon-btn" *ngIf="!isImageSelected">
+            <img
+              src="../../../../assets/img/001-gif.png"
+              class="comment-icon"
+              alt="comment-icon"
+            />
           </button>
         </li>
         <li class="comment-icon-list-item">
-          <button type="button" class="comment-icon-btn">
-            <img src="../../../../assets/img/004-sticker.png" class="comment-icon" alt="comment-icon" />
+          <button type="button" class="comment-icon-btn" *ngIf="!isImageSelected">
+            <img
+              src="../../../../assets/img/004-sticker.png"
+              class="comment-icon"
+              alt="comment-icon"
+            />
           </button>
         </li>
 
         <li class="comment-icon-list-item comment-icon-list-item-end">
-          <button type="button" class="comment-icon-btn" [ngClass]="{'disabled':!message}" (click)="SendMessage()">
-            <span  class="comment-icon" id="comment-send">
+          <button
+            type="button"
+            class="comment-icon-btn"
+            [ngClass]="{ disabled: !message }"
+            (click)="SendMessage()"
+          >
+            <span class="comment-icon" id="comment-send">
               <i class="fa-brands fa-google-play"></i>
             </span>
           </button>
         </li>
       </ul>
     </label>
+    <div class="previewImage" *ngIf="isImageSelected">
+      <img
+        *ngFor="let image of imagePreviewSrc; let i = index"
+        [src]="image"
+        width="20%"
+        class="img-fluid rounded-start"
+        alt="preview"
+      />
+      <button class="close-file" (click)="closeImage()">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
   </div>
 </div>

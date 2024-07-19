@@ -74,3 +74,37 @@
     }
   }
 }
+.previewImage {
+  position: relative;
+  width: auto;
+  height: fit-content;
+  margin: 1rem 0;
+
+  & > img {
+    display: inline-block;
+    object-fit: cover;
+    max-height: 20rem;
+  }
+
+  & > .close-file {
+    position: absolute;
+    border-radius: 50%;
+    margin: 0 .5rem;
+    top: 0;
+    z-index: 1;
+    // display: flex;
+    color: var(--black);
+    background-color: var(--comment_bakcground);
+    transition: .7s background-color;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #bdc3c7;
+    }
+
+    i {
+      font-size: 12px;
+      font-weight: 900;
+    }
+  }
+}
