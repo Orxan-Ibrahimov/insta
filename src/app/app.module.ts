@@ -34,6 +34,7 @@ import { FollowerItemComponent } from './components/followers-card/follower-item
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentItemComponent } from './components/comments/comment-item/comment-item.component';
 import { MakeCommentComponent } from './components/comments/make-comment/make-comment.component';
+import { GifsComponent } from './components/gifs/gifs.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { MakeCommentComponent } from './components/comments/make-comment/make-co
     FollowerItemComponent,
     CommentsComponent,
     CommentItemComponent,
-    MakeCommentComponent
+    MakeCommentComponent,
+    GifsComponent
     
   ],
   imports: [

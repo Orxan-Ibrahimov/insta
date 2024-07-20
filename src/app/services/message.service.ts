@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Message } from '../models/message';
+import { GIF } from '../models/gif';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,16 @@ export class MessageService {
     });
    }
   private messageSubject: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
+  private image_subject: BehaviorSubject<GIF> = new BehaviorSubject<GIF>(null);
   messages$: Observable<Message[]> = this.messageSubject.asObservable();
+  image$: Observable<GIF> = this.image_subject.asObservable();
 
   updateData(newData: Message[]) {
     this.messageSubject.next(newData);
+  }
+
+  update_image(message: GIF) {
+    this.image_subject.next(message);
   }
 
   getMessages():Observable<Message[]>{    

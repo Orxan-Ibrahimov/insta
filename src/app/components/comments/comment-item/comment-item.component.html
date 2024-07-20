@@ -7,14 +7,17 @@
     />
   </div>
   <div class="commentary-body">
-    <div class="message-box">
+    <a *ngIf="!post_message.message" href="/profile/{{post_message.user?.id}}" class="only_user">{{ post_message.user?.nickname }}</a>
+
+    <div *ngIf="post_message.message" class="message-box">
       <a href="/profile/{{post_message.user?.id}}" class="user">{{ post_message.user?.nickname }}</a>
       <p class="message">
         {{ post_message.message }}
       </p>
     </div>
 
-    <img [src]="post_message.image"  alt="">
+    <img *ngIf="post_message.image" [src]="post_message.image"  alt="">
+    <img *ngIf="!post_message.image && post_message.gif" [src]="post_message.gif.url"  alt="">
 
 
     <div class="message-details">

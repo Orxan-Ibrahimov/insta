@@ -33,6 +33,7 @@
         padding: 0;
 
         & > .comment-icon-list-item {
+          position: relative;
           margin: 0 0.2rem;
           & > .comment-icon-btn {
             width: 35px;
@@ -89,13 +90,12 @@
   & > .close-file {
     position: absolute;
     border-radius: 50%;
-    margin: 0 .5rem;
+    margin: 0 0.5rem;
     top: 0;
     z-index: 1;
-    // display: flex;
     color: var(--black);
     background-color: var(--comment_bakcground);
-    transition: .7s background-color;
+    transition: 0.7s background-color;
     cursor: pointer;
 
     &:hover {

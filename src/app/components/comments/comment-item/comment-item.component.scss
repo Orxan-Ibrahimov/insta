@@ -11,6 +11,13 @@
   }
   & > .commentary-body {
     width: 100%;
+
+    & > .only_user {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+    }
     & > .message-box {
       max-width: 80%;
       word-wrap: break-word;
@@ -29,9 +36,9 @@
     }
 
     & > img {
-      width: 30%;
+      width: 20%;
       border-radius: 1rem;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
     }
 
     & > .message-details {

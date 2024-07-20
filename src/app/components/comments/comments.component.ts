@@ -19,8 +19,7 @@ export class CommentsComponent implements OnInit {
   ngOnInit(): void {
     this.postService.current_post$.subscribe(cp => {
       this.post_messages = cp.messages;
-      console.log(cp.messages);
-      
+      console.log(cp.messages);      
     });
     
   }

@@ -12,7 +12,6 @@ export class CommentItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // console.log('x:',this.post_message);
     
   }
 

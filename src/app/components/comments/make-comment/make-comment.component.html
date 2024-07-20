@@ -15,7 +15,11 @@
       ></textarea>
       <ul class="comment-icon-list">
         <li class="comment-icon-list-item">
-          <button type="button" class="comment-icon-btn" *ngIf="!isImageSelected">
+          <button
+            type="button"
+            class="comment-icon-btn"
+            *ngIf="!gif_image && !message_image"
+          >
             <img
               src="../../../../assets/img/003-hacker.png"
               class="comment-icon"
@@ -45,8 +49,8 @@
           <button
             type="button"
             class="comment-icon-btn"
-            *ngIf="!isImageSelected"
-            (click)="choseImage(image)"
+            *ngIf="!gif_image && !message_image"
+            (click)="choseImage(image, 'image')"
             id="photo"
           >
             <img
@@ -57,16 +61,29 @@
           </button>
         </li>
         <li class="comment-icon-list-item">
-          <button type="button" class="comment-icon-btn" *ngIf="!isImageSelected">
+          <button
+            type="button"
+            class="comment-icon-btn"
+            (click)="choseImage(image, 'gif')"
+            id="gif"
+            *ngIf="!gif_image && !message_image"
+          >
             <img
               src="../../../../assets/img/001-gif.png"
               class="comment-icon"
               alt="comment-icon"
             />
           </button>
+          <app-gifs [ngStyle]="{'display': gif_selected?'block':'none'}"></app-gifs>
         </li>
         <li class="comment-icon-list-item">
-          <button type="button" class="comment-icon-btn" *ngIf="!isImageSelected">
+          <button
+            type="button"
+            class="comment-icon-btn"
+            *ngIf="!gif_image && !message_image"
+            (click)="choseImage(image, 'webp')"
+            id="webp"
+          >
             <img
               src="../../../../assets/img/004-sticker.png"
               class="comment-icon"
@@ -79,7 +96,7 @@
           <button
             type="button"
             class="comment-icon-btn"
-            [ngClass]="{ disabled: !message }"
+            [ngClass]="{ disabled: !message && !gif_image && !message_image }"
             (click)="SendMessage()"
           >
             <span class="comment-icon" id="comment-send">
@@ -89,10 +106,9 @@
         </li>
       </ul>
     </label>
-    <div class="previewImage" *ngIf="isImageSelected">
-      <img
-        *ngFor="let image of imagePreviewSrc; let i = index"
-        [src]="image"
+    <div class="previewImage" *ngIf="gif_image || message_image">
+      <img        
+        [src]="message_image?message_image:gif_image.url"
         width="20%"
         class="img-fluid rounded-start"
         alt="preview"
