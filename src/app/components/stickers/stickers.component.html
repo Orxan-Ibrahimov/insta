@@ -1,0 +1,40 @@
+<div class="sticker-box">
+  <div class="sticker-header">
+    <ul class="sticker-menu-list">
+      <li class="sticker-menu-item active">
+        <button type="button" class="sticker-menu-item-btn">
+          <span class="sticker-menu-item-icon"> <i class="pi pi-search"></i></span>
+        </button>
+      </li>
+      <li class="sticker-menu-item">
+        <button type="button" class="sticker-menu-item-btn">
+          <span class="sticker-menu-item-icon"> <i class="pi pi-clock"></i></span>
+        </button>
+      </li>
+
+      <li class="sticker-menu-item" *ngFor="let sticker_pack of me.sticker_packs">
+        <button type="button" class="sticker-menu-item-btn">
+            <div class="sticker-container">
+                <!-- <emoji-mart (emojiSelect)="addSticker($event)"></emoji-mart> -->
+              </div>
+            <!-- <img [src]="sticker_pack.image" width="25" height="25" alt="sticker-pack" /> -->
+          <!-- <span class="sticker-menu-item-icon"> {{sticker_pack.name}}</span> -->
+        </button>
+      </li>
+      <li id="last" class="sticker-menu-item">
+        <button type="button" class="sticker-menu-item-btn">
+          <span class="sticker-menu-item-icon"> <i class="pi pi-plus"></i></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="sticker-body">
+    <!-- <input
+        type="text"
+        placeholder="Right here..."
+        [(ngModel)]="search"
+        (ngModelChange)="onSearch()"
+      /> -->
+    <!-- <img [src]="gif.url" *ngFor="let gif of gifs" class="gif-image" alt="gif"/> -->
+  </div>
+</div>

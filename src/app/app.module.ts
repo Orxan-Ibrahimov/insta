@@ -35,6 +35,8 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { CommentItemComponent } from './components/comments/comment-item/comment-item.component';
 import { MakeCommentComponent } from './components/comments/make-comment/make-comment.component';
 import { GifsComponent } from './components/gifs/gifs.component';
+import { StickersComponent } from './components/stickers/stickers.component';
+
 
 @NgModule({
   declarations: [
@@ -60,8 +62,8 @@ import { GifsComponent } from './components/gifs/gifs.component';
     CommentsComponent,
     CommentItemComponent,
     MakeCommentComponent,
-    GifsComponent
-    
+    GifsComponent,
+    StickersComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,7 @@ import { GifsComponent } from './components/gifs/gifs.component';
     HttpClientModule,
     ReactiveFormsModule,
     InputMaskModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [AuthGuardService,AuthService],
   bootstrap: [AppComponent]

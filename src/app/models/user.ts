@@ -1,5 +1,6 @@
 import { Citizenship } from "./citizenship";
 import { Post } from "./postData";
+import { StickerPack } from "./sticker_pack";
 
 export interface User {
   [x: string]: any;
@@ -12,8 +13,9 @@ export interface User {
   profile?:string;
   cover?:string;
   status?:string;
-  posts?:Post[],
-  citizenship?:Citizenship,
-  followers?:User[],
-  followings?:User[]
+  posts?:Post[];
+  citizenship?:Citizenship;
+  followers?:User[];
+  followings?:User[];
+  sticker_packs?:StickerPack[];
 }

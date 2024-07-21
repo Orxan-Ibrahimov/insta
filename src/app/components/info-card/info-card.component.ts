@@ -15,7 +15,6 @@ export class InfoCardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private actived_route: ActivatedRoute,
-    private jwtService: JwtService,
     private localeStorageService: LocaleStorageService,
     private usersService: UsersService
   ) {}

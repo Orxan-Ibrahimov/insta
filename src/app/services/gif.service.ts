@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
-import { User } from '../models/user';
-import { Citizenship } from '../models/citizenship';
 import { Like } from '../models/like';
 import { GIF } from '../models/gif';
 

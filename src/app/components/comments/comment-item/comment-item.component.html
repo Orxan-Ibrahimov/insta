@@ -1,29 +1,42 @@
 <div class="commentary">
   <div class="commentary-header">
     <img
-      [src]="post_message.user?.profile"
+      [src]="post_comment.user?.profile"
       class="commentary-image"
       alt="profile"
     />
   </div>
   <div class="commentary-body">
-    <a *ngIf="!post_message.message" href="/profile/{{post_message.user?.id}}" class="only_user">{{ post_message.user?.nickname }}</a>
+    <a
+      *ngIf="!post_comment.comment"
+      href="/profile/{{ post_comment.user?.id }}"
+      class="only_user"
+      >{{ post_comment.user?.nickname }}</a
+    >
 
-    <div *ngIf="post_message.message" class="message-box">
-      <a href="/profile/{{post_message.user?.id}}" class="user">{{ post_message.user?.nickname }}</a>
+    <div *ngIf="post_comment.comment" class="message-box">
+      <a href="/profile/{{ post_comment.user?.id }}" class="user">{{
+        post_comment.user?.nickname
+      }}</a>
       <p class="message">
-        {{ post_message.message }}
+        {{ post_comment.comment }}
       </p>
     </div>
 
-    <img *ngIf="post_message.image" [src]="post_message.image"  alt="">
-    <img *ngIf="!post_message.image && post_message.gif" [src]="post_message.gif.url"  alt="">
-
+    <img *ngIf="post_comment.image" [src]="post_comment.image" alt="" />
+    <img
+      *ngIf="!post_comment.image && post_comment.gif"
+      [src]="post_comment.gif.url"
+      alt=""
+    />
 
     <div class="message-details">
-        <a href="" class="message-detail">3 gun</a>
-        <a href="" class="message-detail bold-message">Beyen</a>
-        <a href="" class="message-detail bold-message">Cavab yaz</a>
+      <button class="message-detail"
+        >{{ comment_date_parse }}
+        <span class="date-detail">{{ date_detail }}</span>
+      </button>
+      <a href="" class="message-detail bold-message">Beyen</a>
+      <a href="" class="message-detail bold-message">Cavab yaz</a>
     </div>
   </div>
 </div>

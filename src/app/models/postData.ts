@@ -1,6 +1,7 @@
+import { Comment } from "./comment";
 import { Like } from "./like";
-import { Message } from "./message";
 import { User } from "./user";
+
 
 export interface Post{
     id:string;
@@ -12,6 +13,6 @@ export interface Post{
     liked?:boolean;    
     user:User;  
     created_at:Date; 
-    messages:Message[];
+    comments:Comment[];
     read_comments: boolean;
 }

@@ -2,9 +2,9 @@ import { GIF } from "./gif";
 import { Post } from "./postData";
 import { User } from "./user";
 
-export interface Message {
+export interface Comment {
   id: string;
-  message: string;
+  comment: string;
   image: string;
   user: User;
   post: Post;

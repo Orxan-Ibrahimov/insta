@@ -81,7 +81,7 @@
             type="button"
             class="comment-icon-btn"
             *ngIf="!gif_image && !message_image"
-            (click)="choseImage(image, 'webp')"
+            (click)="choseImage(image, 'sticker')"
             id="webp"
           >
             <img
@@ -90,6 +90,9 @@
               alt="comment-icon"
             />
           </button>
+
+          <app-stickers [ngStyle]="{'display': sticker_selected?'block':'none'}"></app-stickers>
+
         </li>
 
         <li class="comment-icon-list-item comment-icon-list-item-end">
@@ -119,3 +122,5 @@
     </div>
   </div>
 </div>
+
+

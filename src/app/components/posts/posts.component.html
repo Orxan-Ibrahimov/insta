@@ -23,7 +23,7 @@
     </video>
   </div>
   <div class="postReact">
-    <button type="button" (click)="DoLike()">
+    <button type="button" class="react-btn" id="post-like" (click)="DoLike()">
       <img
         [src]="
           liked
@@ -32,11 +32,23 @@
         "
         alt="{{ liked ? 'like' : 'notlike' }}"
       />
+      <ul class="emotions-list">
+        <li class="emotions-list-item">
+          <button type="button" class="emotions-list-item-btn">
+            <img src="../../../assets/img/hearted.gif" class="emotions-list-item-image" alt="">
+          </button>
+        </li>
+        <li class="emotions-list-item">
+          <button type="button" class="emotions-list-item-btn">
+            <img src="../../../assets/img/liked.gif" class="emotions-list-item-image" alt="">
+          </button>
+        </li>       
+      </ul>
     </button>
-    <button type="button" (click)="OpenComments()">
+    <button type="button" class="react-btn" (click)="OpenComments()">
       <img src="../../../assets/img/comment.png" alt="comment" />
     </button>
-    <img src="../../../assets/img/share.png" alt="share" />
+    <img src="../../../assets/img/share.png" class="react-btn" alt="share" />
   </div>
 
   <span class="like">{{ Post.likes.length }} likes</span>

@@ -1,0 +1,65 @@
+.sticker-box {
+  right: 50%;
+  position: absolute;
+  width: 220px;
+  bottom: 100%;
+  z-index: 1;
+  background-color: aqua;
+  & > .sticker-header {
+    & > .sticker-menu-list {
+      display: flex;
+      padding: 0;
+      background-color: bisque;
+      position: relative;
+
+      & > .sticker-menu-item {
+        padding: .5rem;
+        & > .sticker-menu-item-btn {
+          & > .sticker-menu-item-icon {
+            color: gray;            
+
+            & > i {
+                font-weight: bold;
+                font-size: large;
+              }
+          }
+        }
+      }
+
+      & > .sticker-menu-item.active {
+        position: relative;
+        & > .sticker-menu-item-btn {
+          & > .sticker-menu-item-icon {
+            color: blue;            
+          }
+        }
+
+        &::after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: blue;
+        }
+      }
+
+      & > #last{
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+
+  & > .sticker-body {
+    overflow-y: auto;
+    // height: 250px;
+    max-height: 250px;
+    min-height: 100px;
+    & > .sticker-image {
+      width: 100%;
+      cursor: pointer;
+    }
+  }
+}

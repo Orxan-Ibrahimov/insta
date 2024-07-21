@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GIF } from 'src/app/models/gif';
+import { CommentService } from 'src/app/services/comment.service';
 import { GIFService } from 'src/app/services/gif.service';
-import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-gifs',
@@ -11,7 +11,7 @@ import { MessageService } from 'src/app/services/message.service';
 export class GifsComponent implements OnInit {
   constructor(
     private gifService: GIFService,
-    private messageService: MessageService
+    private commentService: CommentService
   ) {}
   gifs: GIF[];
   message_image: any;
@@ -25,7 +25,7 @@ export class GifsComponent implements OnInit {
       });
   }
   ngOnInit(): void {
-    this.messageService.image$.subscribe((img) => {
+    this.commentService.image$.subscribe((img) => {
       this.message_image = img;
     });
     this.gifService.get_searching_gifs('').subscribe((gifs) => {
@@ -34,6 +34,6 @@ export class GifsComponent implements OnInit {
   }
 
   Okay(gif: GIF) {
-    this.messageService.update_image(gif);
+    this.commentService.update_image(gif);
   }
 }
