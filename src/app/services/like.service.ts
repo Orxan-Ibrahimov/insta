@@ -23,4 +23,8 @@ export class LikeService {
   delete(lid: string): Observable<Like> {
     return this.http.delete<Like>(`${this.ApiUrl}/${lid}`);
   }
+
+  change_emotion(lid: string, like: Like): Observable<Like> {
+    return this.http.put<Like>(`${this.ApiUrl}/${lid}`, like);
+  }
 }

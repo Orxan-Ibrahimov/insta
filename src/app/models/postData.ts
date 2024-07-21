@@ -5,7 +5,6 @@ import { User } from "./user";
 
 export interface Post{
     id:string;
-    name?:string;
     description?:string;
     images?:string[];
     video?:string;
