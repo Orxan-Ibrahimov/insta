@@ -15,10 +15,7 @@ export class CommentItemComponent implements OnInit {
   date_detail: string;
   ngOnInit(): void {
     this.comment_date_parse = this.Parse_MessageDate(this.post_comment.date);
-     this.date_detail = this.formatDateTime(new Date(this.post_comment.date));
-
-     console.log(this.date_detail);
-     
+     this.date_detail = this.formatDateTime(new Date(this.post_comment.date));     
   }
 
   formatDateTime(date: Date): string {

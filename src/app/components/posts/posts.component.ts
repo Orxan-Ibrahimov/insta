@@ -29,6 +29,7 @@ export class PostsComponent implements OnInit {
   like_id: string;
   liked: boolean;
   emotions: Emotion[];
+  diff_emotions: Emotion[] = [];
   emotion: Emotion;
   default: Emotion;
   like: Like;
@@ -45,6 +46,19 @@ export class PostsComponent implements OnInit {
           if (like.post?.id === this.Post?.id && like.who_likes?.id == me?.id) {
             this.like = like;
             this.emotion = like.emotion;
+            let has_emotion = true;
+            if (this.diff_emotions.length === 0)
+              this.diff_emotions.push(like.emotion);
+            else {
+              this.diff_emotions.forEach((emotion) => {
+                if (like.emotion.image !== emotion.image) has_emotion = false;
+              });
+
+              if (!has_emotion) {
+                this.diff_emotions.push(like.emotion);
+                has_emotion = true;
+              }
+            }
           }
         });
       });
@@ -77,8 +91,6 @@ export class PostsComponent implements OnInit {
         });
       });
     } else if (emotion && this.liked) {
-
-
       this.like.emotion = emotion;
       this.likeService
         .change_emotion(this.like.id, this.like)

@@ -43,8 +43,6 @@ export class InfoCardComponent implements OnInit {
       this.actived_route.params.subscribe((params) => {
         this.usersService.getUserById(params['pid']).subscribe((user) => {
           this.spec_user = user;
-          console.log('me', me);
-          console.log('user', user);
           
           if (me === user) this.is_me = true;
           else this.is_me = false;

@@ -25,9 +25,7 @@ export class PostService {
   data$: Observable<Post[]> = this.dataSubject.asObservable();
   current_post$: Observable<Post> = this.current_post_subject.asObservable();
 
-  update_current_post(new_post: Post) {
-    console.log('new Post: ', new_post);
-    
+  update_current_post(new_post: Post) {    
     this.current_post_subject.next(new_post);
   }
 

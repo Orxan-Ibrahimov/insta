@@ -24,8 +24,37 @@
   </div>
 
   <div class="post-details" *ngIf="liked">
-    <span class="like" *ngIf="Post.likes.length === 1 "> You </span>
-    <span class="like" *ngIf="Post.likes.length > 1 "> You and {{Post.likes.length -1 }} others </span>
+    <button type="button" class="like-details">
+      <ul class="current-emotion-list">
+        <li
+          class="current-emotion-list-item"
+          *ngFor="let emotion of diff_emotions"
+        >
+          <img
+            [src]="emotion.image"
+            width="20px"
+            height="20px"
+            class="current-emotion-list-item-img"
+            alt="emotion"
+          />
+        </li>
+      </ul>
+      <button type="button" class="like-text">
+        {{
+          Post.likes.length === 1
+            ? "You"
+            : "You and " + (Post.likes.length - 1).toString() + " others"
+        }}
+
+        <ul class="liker-list">
+          <li class="liker-list-item" *ngFor="let like of Post.likes">
+            <p class="liker-list-item-text">
+              {{ like.who_likes.first_name + " " + like.who_likes.last_name }}
+            </p>
+          </li>
+        </ul>
+      </button>
+    </button>
   </div>
 
   <div class="postReact">
@@ -41,11 +70,15 @@
       <p class="like-word">{{ emotion.name }}</p>
     </button> -->
 
-    <button type="button" class="react-btn" id="post-like" (click)="liked?DoLike($event,null):DoLike($event,default)">
+    <button
+      type="button"
+      class="react-btn"
+      id="post-like"
+      (click)="liked ? DoLike($event, null) : DoLike($event, default)"
+    >
       <img
-        [src]="liked?emotion?.image:'../../../assets/img/notlike.png'"
+        [src]="liked ? emotion?.image : '../../../assets/img/notlike.png'"
         alt="{{ liked ? 'like' : 'notlike' }}"
-
       />
       <p class="like-word" *ngIf="liked">{{ emotion?.name }}</p>
       <ul class="emotions-list">
@@ -53,7 +86,7 @@
           <button
             type="button"
             class="emotions-list-item-btn"
-            (click)="DoLike($event,emotion)"
+            (click)="DoLike($event, emotion)"
           >
             <img
               [src]="emotion?.action"

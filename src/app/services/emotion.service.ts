@@ -14,9 +14,7 @@ export class EmotionService {
   ApiUrl = environment.API_URL + 'emotions';
   
   constructor(private http:HttpClient) { 
-    this.get_default_emotion('I liked it').subscribe(s => {
-      // console.log(s);
-      
+    this.get_default_emotion('I liked it').subscribe(s => {      
       this.update_current_emotion(s);
     });
   }
@@ -28,7 +26,6 @@ export class EmotionService {
   current_emotion$: Observable<Emotion> = this.current_emotion_subject.asObservable();
 
   update_current_emotion(emotion: Emotion) {
-    // console.log('new Emotion: ', emotion);
     
     this.current_emotion_subject.next(emotion);
   }
