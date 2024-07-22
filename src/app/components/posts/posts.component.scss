@@ -96,13 +96,43 @@
       transition: 0.7s color;
       display: flex;
 
-     
-
       & > .current-emotion-list {
         display: flex;
         & > .current-emotion-list-item {
+          position: relative;
+          &:hover {
+            & > .liker-list {
+              display: block !important;
+            }
+          }
           & > .current-emotion-list-item-img {
             transform: translateX(-50%);
+          }
+
+          & > .liker-list {
+            position: absolute;
+            left: 100%;
+            transform: translateX(-50%);
+            top: 100%;
+            width: 150px;
+            display: none;
+            background-color: black;
+            color: white;
+            padding: 0;
+            z-index: 1;
+            border-radius: 1rem;
+            padding: 1rem 0.5rem;
+            opacity: 0.9;
+            margin: 0.5rem 0;
+
+            & > .liker-list-item {
+              padding: 0 0.5rem;
+              & > .liker-list-item-text {
+                font-size: 12px;
+                text-align: left;
+                margin: 0;
+              }
+            }
           }
         }
       }
@@ -112,7 +142,7 @@
 
         &:hover {
           color: blue;
-  
+
           & > .liker-list {
             display: block;
           }
