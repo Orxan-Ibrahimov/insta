@@ -30,6 +30,7 @@ export class ProfileEditModalComponent implements OnInit {
     nickname: '',
     id: '',
     password: '',
+    professional: ''
   };
   citizenships: Citizenship[];
   selectedCitizenship;
@@ -93,8 +94,10 @@ export class ProfileEditModalComponent implements OnInit {
         .subscribe((updatedUser) => {
           this.visible = false;
           this.not_visible.emit();
+          // this.closeModal();
           this.localeStorageService.me$.subscribe((users) => {
             this.localeStorageService.updateData(updatedUser);
+            
           });
         });
     }

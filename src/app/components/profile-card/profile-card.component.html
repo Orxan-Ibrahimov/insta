@@ -5,26 +5,26 @@
   </div>
 
   <div class="profile-name">
-    <span id="name">Zendaya MJ</span>
-    <span>Senior UI/UX Designer</span>
+    <span id="name">{{ me?.first_name +  " " + me?.last_name }}</span>
+    <span>{{ me?.professional }}</span>
   </div>
 
   <div class="follow-status">
     <hr />
     <div>
       <div class="follow">
-        <span>{{ this.me?.followings.length }}</span>
+        <span>{{ me?.followings.length }}</span>
         <span>Followings</span>
       </div>
       <div class="vl"></div>
       <div class="follow">
-        <span>{{ this.me?.followers.length }}</span>
+        <span>{{ me?.followers.length }}</span>
         <span>Followers</span>
       </div>
 
       <div class="vl" *ngIf="ProfilePage"></div>
       <div class="follow" *ngIf="ProfilePage">
-        <span>{{ this.me?.posts.length }}</span>
+        <span>{{ me?.posts.length }}</span>
         <span>Posts</span>
       </div>
     </div>

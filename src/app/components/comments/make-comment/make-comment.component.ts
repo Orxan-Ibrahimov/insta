@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Comment } from 'src/app/models/comment';
 import { GIF } from 'src/app/models/gif';
 import { Post } from 'src/app/models/postData';
 import { User } from 'src/app/models/user';
@@ -15,9 +16,10 @@ export class MakeCommentComponent implements OnInit {
   constructor(
     private messageService: CommentService,
     private localeStorageService: LocaleStorageService,
-    private postService: PostService,
+    private postService: PostService
   ) {}
 
+  @Input() comment_id: string;
   message: string;
   gif_image: GIF;
   message_image: any;
@@ -30,14 +32,15 @@ export class MakeCommentComponent implements OnInit {
   selectedFile;
   imagePreviewSrc: any = [];
 
-
   ngOnInit(): void {
     this.localeStorageService.me$.subscribe((me) => {
       this.me = me;
       this.ms = new FormData();
       this.ms.append('user', this.me.id);
     });
-
+    this.postService.current_post$.subscribe((post) => {
+      this.current_post = post;
+    });
     this.messageService.image$.subscribe((img) => {
       this.gif_image = img;
       if (this.gif_image) this.gif_selected = false;
@@ -77,20 +80,20 @@ export class MakeCommentComponent implements OnInit {
   }
 
   SendMessage() {
-    this.postService.current_post$.subscribe((post) => {
-      this.current_post = post;
-    });
 
     if (this.message) this.ms.append('comment', this.message);
     if (this.gif_image) this.ms.append('gif', this.gif_image.id);
     this.ms.append('post', this.current_post.id);
+    if (this.comment_id) this.ms.append('replied_to', this.comment_id);
 
     this.messageService.addComment(this.ms).subscribe((added_message) => {
-      this.messageService
-        .getCommentById(added_message.id)
-        .subscribe((message) => {
-          this.current_post.comments.push(message);
-          this.postService.update_current_post(this.current_post);
+      this.postService
+        .getPostById(this.current_post.id)
+        .subscribe((post) => {
+          console.log(post);
+          
+          this.current_post.comments = post.comments;
+          // this.postService.update_current_post(post);
           this.ms = new FormData();
           this.ms.append('user', this.me.id);
           this.message = '';

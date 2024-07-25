@@ -22,6 +22,7 @@ export class ProfileCardComponent implements OnInit {
   ngOnInit(): void {
     this.localeStorageService.me$.subscribe((me) => {
       this.me = me;
+      // console.log('me',this.me);
     });
   }
 }

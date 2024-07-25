@@ -18,6 +18,8 @@ export class CommentsComponent implements OnInit {
   ngOnInit(): void {
     this.postService.current_post$.subscribe(cp => {
       this.post_comments = cp.comments;
+      console.log('opop',this.post.comments);
+      
     });
     
   }

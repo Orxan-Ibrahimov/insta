@@ -35,16 +35,13 @@ export class InfoCardComponent implements OnInit {
     this.visible = false;
   }
 
-  // RefreshedUser(data: User) {
-  //   this.spec_user = data;
-  // }
   ngOnInit(): void {
     this.localeStorageService.me$.subscribe((me) => {
       this.actived_route.params.subscribe((params) => {
         this.usersService.getUserById(params['pid']).subscribe((user) => {
           this.spec_user = user;
-          
-          if (me === user) this.is_me = true;
+
+          if (me?.id === user?.id) this.is_me = true;
           else this.is_me = false;
         });
       });

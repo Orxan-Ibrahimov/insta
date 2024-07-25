@@ -2,8 +2,8 @@
     <div>
         <img [src]="follower.profile" alt="follower" class="follower-image" />
         <div class="name">
-            <span>{{follower.first_name}}</span>
-            <span>{{follower.last_name}}</span>
+            <span>{{follower?.first_name}}</span>
+            <span>{{follower?.last_name}}</span>
         </div>
     </div>
     <button *ngIf="me?.id != follower?.id && !followed" class="button follower-button" (click)="Follow()">Follow</button>

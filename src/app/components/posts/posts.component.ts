@@ -44,43 +44,39 @@ export class PostsComponent implements OnInit {
       this.me = me;
       this.refresh_like_id(this.Post.likes);
       this.likeService.get().subscribe((likes) => {
-        // this.de = this.CountLikerEmotionList(this.Post.likes);
-        // console.log(this.Post.likes);
-        
-        
-
         likes.forEach((like) => {
           if (like.post?.id === this.Post?.id && like.who_likes?.id == me?.id) {
             this.like = like;
             this.emotion = like.emotion;
           }
         });
+
+        console.log(this.Post.likes);
       });
     });
     this.emotion_service.get_emotions().subscribe((emotions) => {
       this.emotions = emotions;
       this.likes = this.OKB(this.Post.likes);
-      // console.log('tr:',this.OKB(this.Post.likes));
 
+      // console.log('tr:',this.OKB(this.Post.likes));
     });
   }
 
   OKB(likes: Like[]) {
-    let new_likes:any[] = [];
+    let new_likes: any[] = [];
 
     for (let index = 0; index < this.emotions.length; index++) {
       const emotion = this.emotions[index];
-      let new_sub_likes:any[] = [];
+      let new_sub_likes: any[] = [];
       for (let index = 0; index < likes.length; index++) {
         const like = likes[index];
-        if (like.emotion.image === emotion.image)
-          new_sub_likes.push(like);
+        if (like.emotion.image === emotion.image) new_sub_likes.push(like);
       }
       new_likes.push(new_sub_likes);
     }
 
     console.log(new_likes);
-    
+
     return new_likes;
   }
 
@@ -115,9 +111,9 @@ export class PostsComponent implements OnInit {
           this.emotion = changed_like.emotion;
           this.like = changed_like;
 
-          this.liked = true;
           this.emotion_service.update_current_emotion(changed_like.emotion);
           this.postService.getPostById(this.Post.id).subscribe((p) => {
+            this.liked = true;
             this.Post = p;
             this.refresh_like_id(this.Post.likes);
             this.likes = this.OKB(this.Post.likes);
@@ -125,8 +121,9 @@ export class PostsComponent implements OnInit {
         });
     } else {
       this.likeService.delete(this.like_id).subscribe((deletedLike) => {
-        this.liked = false;
         this.postService.getPostById(this.Post.id).subscribe((p) => {
+          this.liked = false;
+
           this.Post = p;
         });
       });

@@ -11,9 +11,8 @@ export class AuthGuardService implements CanActivate {
   constructor(private router:Router, private tokenStorage:LocaleStorageService) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
    boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const token = this.tokenStorage.getItem()?.split('.')[1];  
-  
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars  
+  const token = this.tokenStorage.getItem()?.split('.')[1];    
     if(token)  {
       const tokenData = JSON.parse(atob(token));
       if(this._getTokenExp(tokenData.exp))

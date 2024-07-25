@@ -10,4 +10,6 @@ export interface Comment {
   post: Post;
   date: Date;
   gif: GIF;
+  comments:Comment[];
+  replied_to:Comment;
 }

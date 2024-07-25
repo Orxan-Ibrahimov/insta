@@ -1,6 +1,7 @@
 .comment {
   display: flex;
   gap: 1rem;
+  margin: 1rem 0;
   & > .comment-header {
     & > .comment-image {
       width: 40px;

@@ -13,16 +13,30 @@ export class LocaleStorageService {
     private usersService: UsersService,
     private jwtService: JwtService
   ) {
-    this.me().subscribe((me) => {      
-      if(me)
-      this.me_subject.next(me);
+    this.me$.subscribe((me) => {
+
+     if (!me) 
+     {
+      this.me().subscribe(m =>{
+        this.me_subject.next(m);
+      });
+     } 
+    else{
+      // this.me_subject.next(me);
+      // console.log('vbvb',me);
+      
+    }
     });
+ 
+  
   }
 
   private me_subject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   me$: Observable<User> = this.me_subject.asObservable();
 
   updateData(me: User) {
+    console.log('updated me', me);
+    
     this.me_subject.next(me);
   }
   tokenName = 'token';

@@ -63,7 +63,7 @@ import { StickersComponent } from './components/stickers/stickers.component';
     CommentItemComponent,
     MakeCommentComponent,
     GifsComponent,
-    StickersComponent
+    StickersComponent,
   ],
   imports: [
     BrowserModule,

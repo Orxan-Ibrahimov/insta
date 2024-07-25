@@ -21,7 +21,8 @@ export class FollowerItemComponent implements OnInit {
   Follow() {
     this.usersService.follow(this.me.id, this.follower.id).subscribe(
       (user) => {
-        this.me = user;
+        // this.me = user;
+        this.localeStorageService.updateData(user);
         this.followed = true;
       },
       (err) => {
@@ -31,8 +32,10 @@ export class FollowerItemComponent implements OnInit {
   }
   ngOnInit(): void {
     this.localeStorageService.me$.subscribe((me) => {
-      this.me = me;      
-      this.me.followers.filter((follower) => {
+      this.me = me;    
+      console.log('klklk', this.me);
+        
+      this.me?.followers?.filter((follower) => {
         if (follower?.id === this.follower?.id) this.followed = true;
       });
     });

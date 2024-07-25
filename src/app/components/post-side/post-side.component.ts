@@ -30,10 +30,10 @@ export class PostSideComponent implements OnInit {
     this.localeStorageService.me$.subscribe((me) => {
       this.me = me;
     });
-    this.postService.getPosts().subscribe((posts) => {      
-      this.postService.data$.subscribe((data) => {
-        this.special_posts = data.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
-      });
+    this.postService.data$.subscribe((data) => {
+      this.special_posts = data.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
+      console.log('special: ', data);
+      
     });
   }
 }

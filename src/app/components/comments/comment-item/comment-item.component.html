@@ -36,7 +36,17 @@
         <span class="date-detail">{{ date_detail }}</span>
       </button>
       <a href="" class="message-detail bold-message">Beyen</a>
-      <a href="" class="message-detail bold-message">Cavab yaz</a>
+      <button class="message-detail bold-message" (click)="MakeReply()">
+        <p>Cavab yaz</p>
+      
+      </button>
     </div>
+<!-- 
+    <div *ngFor="let comment of post_comment.comments">
+
+    </div> -->
+    
+    <app-comment-item *ngFor="let comment of post_comment.comments" [post_comment]="comment"></app-comment-item>
+    <app-make-comment *ngIf="i_must_reply" [comment_id]="post_comment.id"></app-make-comment>
   </div>
 </div>

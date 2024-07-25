@@ -1,25 +1,25 @@
 <div class="info-card">
   <div class="info-header">
     <h4>{{is_me ? 'Your': spec_user?.nickname + "'s"}} Info</h4>
-    <span class="info-edit-icon" *ngIf="!is_me" (click)="showDialog()">
+    <span class="info-edit-icon" *ngIf="is_me" (click)="showDialog()">
       <i class="pi pi-user-edit"></i>
     </span>
   </div>
 
   <div class="info-body">
     <div class="info">
-      <span class="info-title">Status</span>
+      <span class="info-title">Status </span>
       <span class="info-text">{{ spec_user?.status }}</span>
     </div>
 
     <div class="info">
-      <span class="info-title">CitizenShip</span>
+      <span class="info-title">CitizenShip </span>
       <!-- <span class="info-text">{{user.citizenship.fullname}}</span> -->
       <img [src]="spec_user?.citizenship.flag" alt="flag" width="30"  />
     </div>
 
     <div class="info">
-      <span class="info-title">Professional is</span>
+      <span class="info-title">Professional is </span>
       <span class="info-text">{{spec_user?.professional}}</span>
     </div>
   </div>

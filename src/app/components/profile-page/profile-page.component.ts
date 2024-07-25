@@ -18,12 +18,12 @@ export class ProfilePageComponent implements OnInit {
 
   isProfile: boolean = true;
   ngOnInit(): void {
-    // this.actived_router.params.subscribe((params) => {      
-    //   this.user_serveices.getUserById(params['pid']).subscribe((user) => {
-    //     this.spec_user = user;
-    //     console.log(this.spec_user.posts);
+    this.actived_router.params.subscribe((params) => {      
+      this.user_serveices.getUserById(params['pid']).subscribe((user) => {
+        this.spec_user = user;
+        console.log(this.spec_user.posts);
         
-    //   });  
-    // });
+      });  
+    });
   }
 }
