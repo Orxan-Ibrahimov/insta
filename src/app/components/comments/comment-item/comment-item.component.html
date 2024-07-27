@@ -14,13 +14,29 @@
       >{{ post_comment.user?.nickname }}</a
     >
 
-    <div *ngIf="post_comment.comment" class="message-box">
-      <a href="/profile/{{ post_comment.user?.id }}" class="user">{{
-        post_comment.user?.nickname
-      }}</a>
-      <p class="message">
-        {{ post_comment.comment }}
-      </p>
+    <div *ngIf="post_comment.comment" class="message-box" (click)="CommentActionActivate()">
+      <div class="comment-body">
+        <a href="/profile/{{ post_comment.user?.id }}" class="user">{{
+          post_comment.user?.nickname
+        }}</a>
+        <p class="message">
+          {{ post_comment.comment }}
+        </p>
+      </div>
+
+      <button class="dots-btn" *ngIf="is_me && active_actions" >
+        <span class="dots-icon">
+          <i class="pi pi-ellipsis-h"></i>
+        </span>
+
+        <ul class="comment-action-list" *ngIf="active_actions">
+          <li class="comment-action-item">
+            <button class="comment-action-btn" (click)="CommentRemove(post_comment.id)">
+              <p class="comment-action-text">Delete Comment</p>
+            </button>
+          </li>
+        </ul>
+      </button>
     </div>
 
     <img *ngIf="post_comment.image" [src]="post_comment.image" alt="" />
@@ -31,22 +47,23 @@
     />
 
     <div class="message-details">
-      <button class="message-detail"
-        >{{ comment_date_parse }}
+      <button class="message-detail">
+        {{ comment_date_parse }}
         <span class="date-detail">{{ date_detail }}</span>
       </button>
       <a href="" class="message-detail bold-message">Beyen</a>
       <button class="message-detail bold-message" (click)="MakeReply()">
         <p>Cavab yaz</p>
-      
       </button>
     </div>
-<!-- 
-    <div *ngFor="let comment of post_comment.comments">
 
-    </div> -->
-    
-    <app-comment-item *ngFor="let comment of post_comment.comments" [post_comment]="comment"></app-comment-item>
-    <app-make-comment *ngIf="i_must_reply" [comment_id]="post_comment.id"></app-make-comment>
+    <app-make-comment
+      *ngIf="i_must_reply"
+      [comment_id]="post_comment.id"
+    ></app-make-comment>
+    <app-comment-item
+      *ngFor="let comment of post_comment.comments"
+      [post_comment]="comment"
+    ></app-comment-item>
   </div>
 </div>

@@ -27,7 +27,7 @@ export class PostsComponent implements OnInit {
   me: User;
   // comment_visible: boolean;
   like_id: string;
-  liked: boolean;
+  liked: boolean = false;
   emotions: Emotion[];
   de: Emotion[];
   likes: Like[][];
@@ -47,18 +47,16 @@ export class PostsComponent implements OnInit {
         likes.forEach((like) => {
           if (like.post?.id === this.Post?.id && like.who_likes?.id == me?.id) {
             this.like = like;
+            this.liked = true;
             this.emotion = like.emotion;
           }
         });
-
-        console.log(this.Post.likes);
       });
     });
     this.emotion_service.get_emotions().subscribe((emotions) => {
       this.emotions = emotions;
       this.likes = this.OKB(this.Post.likes);
-
-      // console.log('tr:',this.OKB(this.Post.likes));
+      console.log(this.OKB(this.Post.likes));
     });
   }
 
@@ -74,16 +72,35 @@ export class PostsComponent implements OnInit {
       }
       new_likes.push(new_sub_likes);
     }
-
-    console.log(new_likes);
-
     return new_likes;
+  }
+
+  OKB_delete(user_id: string) {
+    for (let i = 0; i < this.emotions.length; i++) {
+      for (let j = 0; j < this.Post.likes.length; j++) {
+        if (user_id === this.likes[i][j]?.who_likes.id) {
+          this.likes[i].splice(j, 1);
+        }
+      }
+    }
+  }
+
+  OKB_add(like:Like) {
+    for (let i = 0; i < this.emotions.length; i++) {
+      let has_emoji = false;
+      for (let j = 0; j < this.Post.likes.length; j++) {
+        if (like.who_likes.id === this.likes[i][j]?.who_likes.id) has_emoji = true;
+      }
+      this.likes[i].push(like);
+      
+    }
   }
 
   DoLike(event: MouseEvent, emotion: Emotion | null) {
     event.stopPropagation();
-
     if (emotion && !this.liked) {
+
+      // return;
       this.emotion = emotion;
 
       const like: Like = {
@@ -94,13 +111,18 @@ export class PostsComponent implements OnInit {
       };
 
       this.likeService.add_like(like).subscribe((createdLike) => {
-        this.postService.getPostById(this.Post.id).subscribe((p) => {
-          this.Post = p;
+        this.postService.getPostById(this.Post.id).subscribe((p) => {         
+          this.Post.likes = p.likes;
           this.liked = true;
           this.like = createdLike;
-          this.likes = this.OKB(this.Post.likes);
-
           this.refresh_like_id(this.Post.likes);
+          this.OKB(this.Post.likes);
+          // this.OKB_add(createdLike);
+
+          // this.liked = true;
+          // this.Post = p;
+          // this.refresh_like_id(this.Post.likes);
+          // this.likes = this.OKB(this.Post.likes);
         });
       });
     } else if (emotion && this.liked) {
@@ -122,8 +144,8 @@ export class PostsComponent implements OnInit {
     } else {
       this.likeService.delete(this.like_id).subscribe((deletedLike) => {
         this.postService.getPostById(this.Post.id).subscribe((p) => {
+          this.OKB_delete(this.me.id);
           this.liked = false;
-
           this.Post = p;
         });
       });

@@ -17,6 +17,10 @@ export class LikeService {
   get(): Observable<Like[]> {
     return this.http.get<Like[]>(`${this.ApiUrl}`);
   }
+
+  get_like_by_id(lid:string): Observable<Like> {
+    return this.http.get<Like>(`${this.ApiUrl}/${lid}`);
+  }
   add_like(like: Like): Observable<Like> {
     return this.http.post<Like>(this.ApiUrl, like);
   }

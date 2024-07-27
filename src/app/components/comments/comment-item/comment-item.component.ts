@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Comment } from 'src/app/models/comment';
+import { CommentService } from 'src/app/services/comment.service';
+import { LocaleStorageService } from 'src/app/services/locale-storage.service';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-comment-item',
@@ -8,8 +11,14 @@ import { Comment } from 'src/app/models/comment';
 })
 export class CommentItemComponent implements OnInit {
   @Input() post_comment: Comment;
+  is_me: boolean = false;
+  active_actions: boolean = false;
 
-  constructor() {}
+  constructor(
+    private localeStorageService: LocaleStorageService,
+    private commentService: CommentService,
+    private postService: PostService
+  ) {}
 
   comment_date_parse: string;
   date_detail: string;
@@ -18,8 +27,41 @@ export class CommentItemComponent implements OnInit {
   ngOnInit(): void {
     this.comment_date_parse = this.Parse_MessageDate(this.post_comment.date);
     this.date_detail = this.formatDateTime(new Date(this.post_comment.date));
+
+    this.localeStorageService.me$.subscribe((me) => {
+      if (this.post_comment.user.id === me.id) this.is_me = true;
+    });
   }
 
+  CommentActionActivate() {
+    this.active_actions = !this.active_actions;
+  }
+
+  CommentRemove(comment_id: string) {
+    console.log('ok');
+
+    this.commentService
+      .RemoveComment(comment_id)
+      .subscribe((deleted_comment) => {
+        console.log('deleted:', deleted_comment);
+
+        this.postService
+          .getPostById(this.post_comment.post.id)
+          .subscribe((post) => {
+            this.postService.current_post$.subscribe((p) => {
+              p.comments = post.comments.filter(
+                (comment) => comment.post.id === p.id
+              );
+            });
+          });
+
+        // this.postService
+        //   .getPostById(this.post_comment.post.id)
+        //   .subscribe((post) => {
+        //     this.postService.update_current_post(post);
+        //   });
+      });
+  }
   MakeReply() {
     this.i_must_reply = !this.i_must_reply;
   }
