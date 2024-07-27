@@ -38,30 +38,13 @@ export class CommentItemComponent implements OnInit {
   }
 
   CommentRemove(comment_id: string) {
-    console.log('ok');
-
     this.commentService
       .RemoveComment(comment_id)
       .subscribe((deleted_comment) => {
-        console.log('deleted:', deleted_comment);
-
-        this.postService
-          .getPostById(this.post_comment.post.id)
-          .subscribe((post) => {
-            this.postService.current_post$.subscribe((p) => {
-              p.comments = post.comments.filter(
-                (comment) => comment.post.id === p.id
-              );
-            });
-          });
-
-        // this.postService
-        //   .getPostById(this.post_comment.post.id)
-        //   .subscribe((post) => {
-        //     this.postService.update_current_post(post);
-        //   });
+        this.post_comment = null;
       });
   }
+
   MakeReply() {
     this.i_must_reply = !this.i_must_reply;
   }

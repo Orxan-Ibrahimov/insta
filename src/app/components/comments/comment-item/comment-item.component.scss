@@ -10,7 +10,7 @@
     }
   }
   & > .commentary-body {
-    // width: 100%;
+    width: 100%;
 
     & > .only_user {
       display: block;
@@ -19,6 +19,7 @@
       color: var(--black);
     }
     & > .message-box {
+      max-width: 80%;
       display: flex;
       justify-content: space-between;
       word-wrap: break-word;
@@ -50,7 +51,7 @@
           padding: 0;
           position: absolute;
           background-color: var(--comment_bakcground);
-          width: 400px;
+          width: 350px;
           left: 50%;
           transform: translateX(-50%);
           z-index: 1;
