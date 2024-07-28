@@ -44,7 +44,6 @@ export class PostsComponent implements OnInit {
       this.me = me;
       this.refresh_like_id(this.Post.likes);
       this.likeService.get().subscribe((likes) => {
-        // this.post_likes = likes.filter(like => like.post.id === this.Post.id);
         likes.forEach((like) => {
           if (like.post?.id === this.Post?.id && like.who_likes?.id == me?.id) {
             this.like = like;
@@ -99,14 +98,11 @@ export class PostsComponent implements OnInit {
         .subscribe((changed_like) => {
           this.emotion = changed_like.emotion;
           this.like = changed_like;
-
-          // this.emotion_service.update_current_emotion(changed_like.emotion);
           this.postService.getPostById(this.Post.id).subscribe((p) => {
-            this.liked = true;
             this.Post = p;
             this.refresh_like_id(this.Post.likes);
             this.emotion_service.get_emotions().subscribe((emotions) => {
-              this.emotions = this.OKB_X(this.Post, emotions);
+              this.emotions = this.OKB_X(p, emotions);
             });
           });
         });
@@ -123,29 +119,6 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  CountLikerEmotionList(Likes: Like[]) {
-    let diff_emotions: Emotion[] = [];
-    Likes.forEach((like) => {
-      let has_emotion = false;
-      if (diff_emotions.length === 0) diff_emotions.push(like.emotion);
-      else {
-        for (let index = 0; index < diff_emotions.length; index++) {
-          const emotion = diff_emotions[index];
-          if (like.emotion.image === emotion.image) {
-            has_emotion = true;
-            break;
-          }
-        }
-
-        if (!has_emotion) {
-          diff_emotions.push(like.emotion);
-          has_emotion = false;
-        }
-      }
-    });
-
-    return diff_emotions;
-  }
   OpenComments() {
     this.Post.read_comments = !this.Post.read_comments;
     this.postService.update_current_post(this.Post);
@@ -157,7 +130,7 @@ export class PostsComponent implements OnInit {
         this.liked = true;
         this.like_id = like.id;
         return;
-      } else this.liked = false;
+      }
     });
   }
 }
