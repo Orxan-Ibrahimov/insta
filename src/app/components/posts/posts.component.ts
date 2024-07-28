@@ -25,24 +25,21 @@ export class PostsComponent implements OnInit {
   @Input() Post: Post | undefined;
 
   me: User;
-  // comment_visible: boolean;
-  like_id: string;
   liked: boolean = false;
   emotions: Emotion[];
-  de: Emotion[];
-  post_likes: Like[];
 
   emotion: Emotion;
   default: Emotion;
   like: Like;
 
   ngOnInit(): void {
+    console.log('ddd', this.Post.likes);
+
     this.emotion_service.current_emotion$.subscribe((data) => {
       this.default = data;
     });
     this.localeStorageService.me$.subscribe((me) => {
       this.me = me;
-      this.refresh_like_id(this.Post.likes);
       this.likeService.get().subscribe((likes) => {
         likes.forEach((like) => {
           if (like.post?.id === this.Post?.id && like.who_likes?.id == me?.id) {
@@ -54,6 +51,8 @@ export class PostsComponent implements OnInit {
       });
     });
     this.emotion_service.get_emotions().subscribe((emotions) => {
+      console.log('emotions', emotions);
+      
       this.emotions = this.OKB_X(this.Post, emotions);
     });
   }
@@ -72,6 +71,8 @@ export class PostsComponent implements OnInit {
     event.stopPropagation();
 
     if (emotion && !this.liked) {
+      console.log("add like");
+      
       this.emotion = emotion;
       const like: Like = {
         who_likes: this.me,
@@ -85,13 +86,18 @@ export class PostsComponent implements OnInit {
           this.Post.likes = p.likes;
           this.liked = true;
           this.like = createdLike;
-          this.refresh_like_id(this.Post.likes);
+
+          console.log('asas:', this.Post.likes);
+
           for (const emotion of this.emotions) {
             if (emotion.id === like.emotion.id) emotion.likes.push(createdLike);
           }
         });
       });
     } else if (emotion && this.liked) {
+      console.log('change emoji');
+      console.log('like', this.like);
+
       this.like.emotion = emotion;
       this.likeService
         .change_emotion(this.like.id, this.like)
@@ -99,18 +105,22 @@ export class PostsComponent implements OnInit {
           this.emotion = changed_like.emotion;
           this.like = changed_like;
           this.postService.getPostById(this.Post.id).subscribe((p) => {
-            this.Post = p;
-            this.refresh_like_id(this.Post.likes);
+            this.Post.likes = p.likes;
             this.emotion_service.get_emotions().subscribe((emotions) => {
               this.emotions = this.OKB_X(p, emotions);
             });
           });
         });
     } else {
-      this.likeService.delete(this.like_id).subscribe((deletedLike) => {
+      console.log('delete like');
+      let like_id = this.Post.likes.find(
+        (like) => like.who_likes.id === this.me.id
+      ).id;
+
+      this.likeService.delete(like_id).subscribe((deletedLike) => {
         this.postService.getPostById(this.Post.id).subscribe((p) => {
           this.liked = false;
-          this.Post = p;
+          this.Post.likes = p.likes;
           this.emotion_service.get_emotions().subscribe((emotions) => {
             this.emotions = this.OKB_X(this.Post, emotions);
           });
@@ -122,15 +132,5 @@ export class PostsComponent implements OnInit {
   OpenComments() {
     this.Post.read_comments = !this.Post.read_comments;
     this.postService.update_current_post(this.Post);
-  }
-
-  refresh_like_id(likes: Like[]) {
-    likes.forEach((like) => {
-      if (like.who_likes.id == this.me?.id) {
-        this.liked = true;
-        this.like_id = like.id;
-        return;
-      }
-    });
   }
 }

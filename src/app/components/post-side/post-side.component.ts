@@ -31,9 +31,7 @@ export class PostSideComponent implements OnInit {
       this.me = me;
     });
     this.postService.data$.subscribe((data) => {
-      this.special_posts = data.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});
-      console.log('special: ', data);
-      
+      this.special_posts = data.sort((a, b) => {return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()});      
     });
   }
 }
