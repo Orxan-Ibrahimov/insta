@@ -26,19 +26,19 @@
   <div class="post-details" *ngIf="liked">
     <button type="button" class="like-details">
       <ul class="current-emotion-list">
-        <li class="current-emotion-list-item" *ngFor="let like of likes">
+        <li class="current-emotion-list-item" *ngFor="let emotion of emotions">
           <img
-            *ngIf="like[0]"
-            [src]="like[0].emotion.image"
+            *ngIf="emotion.likes.length > 0"
+            [src]="emotion.image"
             width="20px"
             height="20px"
             class="current-emotion-list-item-img"
             alt="emotion"
           />
-          <ul class="liker-list" *ngIf="like[0]">
+          <ul class="liker-list" *ngIf="emotion.likes.length > 0">
             <li class="liker-list-item">
-              <p class="liker-list-item-text" *ngFor="let sub_like of like">
-                {{ sub_like.who_likes.first_name + " " + sub_like.who_likes.last_name }}
+              <p class="liker-list-item-text" *ngFor="let like of emotion.likes">
+                {{ like.who_likes.first_name + " " + like.who_likes.last_name }}
               </p>
             </li>
           </ul>
