@@ -1,3 +1,4 @@
+import { CommentLike } from "./comment_like";
 import { GIF } from "./gif";
 import { Post } from "./postData";
 import { User } from "./user";
@@ -11,5 +12,6 @@ export interface Comment {
   date: Date;
   gif: GIF;
   comments:Comment[];
+  comment_likes:CommentLike[];
   replied_to:Comment;
 }

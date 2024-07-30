@@ -1,3 +1,4 @@
+import { CommentLike } from "./comment_like";
 import { Like } from "./like";
 
 export interface Emotion {
@@ -6,5 +7,6 @@ export interface Emotion {
   image: string;
   action: string;
   created_date: Date;
-  likes:Like[]
+  likes:Like[];
+  comment_likes:CommentLike[];
 }

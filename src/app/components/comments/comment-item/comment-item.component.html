@@ -14,7 +14,11 @@
       >{{ post_comment.user?.nickname }}</a
     >
 
-    <div *ngIf="post_comment.comment" class="message-box" (click)="CommentActionActivate()">
+    <div
+      *ngIf="post_comment.comment"
+      class="message-box"
+      (click)="CommentActionActivate()"
+    >
       <div class="comment-body">
         <a href="/profile/{{ post_comment.user?.id }}" class="user">{{
           post_comment.user?.nickname
@@ -24,14 +28,17 @@
         </p>
       </div>
 
-      <button class="dots-btn" *ngIf="is_me && active_actions" >
+      <button class="dots-btn" *ngIf="is_me && active_actions">
         <span class="dots-icon">
           <i class="pi pi-ellipsis-h"></i>
         </span>
 
         <ul class="comment-action-list" *ngIf="active_actions">
           <li class="comment-action-item">
-            <button class="comment-action-btn" (click)="CommentRemove(post_comment.id)">
+            <button
+              class="comment-action-btn"
+              (click)="CommentRemove(post_comment.id)"
+            >
               <p class="comment-action-text">Delete Comment</p>
             </button>
           </li>
@@ -47,14 +54,104 @@
     />
 
     <div class="message-details">
-      <button class="message-detail">
-        {{ comment_date_parse }}
-        <span class="date-detail">{{ date_detail }}</span>
-      </button>
-      <a href="" class="message-detail bold-message">Beyen</a>
-      <button class="message-detail bold-message" (click)="MakeReply()">
-        <p>Cavab yaz</p>
-      </button>
+      <div class="comment-events">
+        <button class="message-detail">
+          {{ comment_date_parse }}
+          <span class="date-detail">{{ date_detail }}</span>
+        </button>
+        <button
+          type="button"
+          class="message-detail bold-message"
+          id="comment_like"
+          (click)="
+            liked ? CommentLike($event, null) : CommentLike($event, default)
+          "
+        >
+          <p class="like-word">{{ liked ? emotion?.name : "Beyen" }}</p>
+
+          <ul class="emotions-list">
+            <li class="emotions-list-item" *ngFor="let emotion of emotions">
+              <button
+                type="button"
+                class="emotions-list-item-btn"
+                (click)="CommentLike($event, emotion)"
+              >
+                <img
+                  [src]="emotion?.action"
+                  class="emotions-list-item-image"
+                  alt="emotion"
+                />
+              </button>
+            </li>
+          </ul>
+        </button>
+        <button class="message-detail bold-message" (click)="MakeReply()">
+          <p>Cavab yaz</p>
+        </button>
+      </div>
+
+      <div class="comment-emotions" *ngIf="liked">
+        <button type="button" class="emotion-details">
+          <ul class="current-comment-emotion-list">
+            <li
+              class="current-comment-emotion-list-item"
+              style="margin: 0 0.3rem"
+            >
+              <p style="margin: 0">{{ post_comment.comment_likes.length }}</p>
+              <ul class="liker-list" *ngIf="emotion.comment_likes.length > 0">
+                <li
+                  class="liker-list-item"
+                  [ngStyle]="{
+                    display: emotion.comment_likes.length > 0 ? 'block' : 'none'
+                  }"
+                  *ngFor="let emotion of emotions"
+                >
+                  <div
+                    *ngIf="emotion.comment_likes.length > 0"
+                    class="liker-list-item-count"
+                  >
+                    <img
+                      [src]="emotion.image"
+                      class="liker-list-item-img"
+                      alt="emotion"
+                    />
+                    <p class="liker-list-item-text">
+                      {{ emotion.comment_likes.length }}
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li
+              class="current-comment-emotion-list-item"
+              *ngFor="let emotion of emotions"
+            >
+              <img
+                *ngIf="emotion.comment_likes.length > 0"
+                [src]="emotion.image"
+                width="20px"
+                height="20px"
+                class="current-comment-emotion-list-item-img"
+                alt="comment-emotion"
+              />
+              <ul class="liker-list" *ngIf="emotion.comment_likes.length > 0">
+                <li class="liker-list-item">
+                  <p
+                    class="liker-list-item-text"
+                    *ngFor="let comment_like of emotion.comment_likes"
+                  >
+                    {{
+                      comment_like.who_likes.first_name +
+                        " " +
+                        comment_like.who_likes.last_name
+                    }}
+                  </p>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </button>
+      </div>
     </div>
 
     <app-make-comment

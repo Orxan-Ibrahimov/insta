@@ -33,8 +33,6 @@ export class PostsComponent implements OnInit {
   like: Like;
 
   ngOnInit(): void {
-    console.log('ddd', this.Post.likes);
-
     this.emotion_service.current_emotion$.subscribe((data) => {
       this.default = data;
     });
@@ -50,9 +48,7 @@ export class PostsComponent implements OnInit {
         });
       });
     });
-    this.emotion_service.get_emotions().subscribe((emotions) => {
-      console.log('emotions', emotions);
-      
+    this.emotion_service.get_emotions().subscribe((emotions) => {     
       this.emotions = this.OKB_X(this.Post, emotions);
     });
   }
