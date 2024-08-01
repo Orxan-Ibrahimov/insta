@@ -36,6 +36,7 @@ import { CommentItemComponent } from './components/comments/comment-item/comment
 import { MakeCommentComponent } from './components/comments/make-comment/make-comment.component';
 import { GifsComponent } from './components/gifs/gifs.component';
 import { StickersComponent } from './components/stickers/stickers.component';
+import { EmojisComponent } from './components/emojis/emojis.component';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { StickersComponent } from './components/stickers/stickers.component';
     MakeCommentComponent,
     GifsComponent,
     StickersComponent,
+    EmojisComponent
   ],
   imports: [
     BrowserModule,

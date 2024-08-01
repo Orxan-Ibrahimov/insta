@@ -12,6 +12,7 @@
         [(ngModel)]="message"
         id="make-comment"
         class="comment-input"
+        (keypress)="WriteMessage()"
       ></textarea>
       <ul class="comment-icon-list">
         <li class="comment-icon-list-item">
@@ -28,13 +29,24 @@
           </button>
         </li>
         <li class="comment-icon-list-item">
-          <button type="button" class="comment-icon-btn">
+          <button
+            type="button"
+            class="comment-icon-btn"
+            (click)="choseImage(image, 'emoji')"
+            id="emoji"
+            *ngIf="!gif_image && !message_image"
+          >
             <img
               src="../../../../assets/img/002-happy.png"
               class="comment-icon"
               alt="comment-icon"
             />
           </button>
+          <app-emojis
+            [ngStyle]="{ display: emoji_selected ? 'block' : 'none' }"
+            [comment_message]="message"
+            (messageEvent)="receiveMessage($event)"
+          ></app-emojis>
         </li>
         <li class="comment-icon-list-item">
           <div style="display: none">
@@ -74,7 +86,9 @@
               alt="comment-icon"
             />
           </button>
-          <app-gifs [ngStyle]="{'display': gif_selected?'block':'none'}"></app-gifs>
+          <app-gifs
+            [ngStyle]="{ display: gif_selected ? 'block' : 'none' }"
+          ></app-gifs>
         </li>
         <li class="comment-icon-list-item">
           <button
@@ -91,8 +105,9 @@
             />
           </button>
 
-          <app-stickers [ngStyle]="{'display': sticker_selected?'block':'none'}"></app-stickers>
-
+          <app-stickers
+            [ngStyle]="{ display: sticker_selected ? 'block' : 'none' }"
+          ></app-stickers>
         </li>
 
         <li class="comment-icon-list-item comment-icon-list-item-end">
@@ -110,8 +125,8 @@
       </ul>
     </label>
     <div class="previewImage" *ngIf="gif_image || message_image">
-      <img        
-        [src]="message_image?message_image:gif_image.url"
+      <img
+        [src]="message_image ? message_image : gif_image.url"
         width="20%"
         class="img-fluid rounded-start"
         alt="preview"
@@ -122,5 +137,3 @@
     </div>
   </div>
 </div>
-
-

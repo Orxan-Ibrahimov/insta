@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Comment } from 'src/app/models/comment';
+import { distinctUntilChanged } from 'rxjs';
+import { EmojiCategory } from 'src/app/models/emoji_category';
 import { GIF } from 'src/app/models/gif';
 import { Post } from 'src/app/models/postData';
 import { User } from 'src/app/models/user';
 import { CommentService } from 'src/app/services/comment.service';
+import { EmojiCategoryService } from 'src/app/services/emoji_category.service';
 import { LocaleStorageService } from 'src/app/services/locale-storage.service';
 import { PostService } from 'src/app/services/post.service';
 
@@ -13,11 +15,16 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./make-comment.component.scss'],
 })
 export class MakeCommentComponent implements OnInit {
+
+
   constructor(
     private messageService: CommentService,
     private localeStorageService: LocaleStorageService,
-    private postService: PostService
-  ) {}
+    private postService: PostService,
+    private emojiCategoryService: EmojiCategoryService,
+  ) {
+    
+  }
 
   @Input() comment_id: string;
   message: string;
@@ -29,10 +36,12 @@ export class MakeCommentComponent implements OnInit {
 
   gif_selected: boolean = false;
   sticker_selected: boolean = false;
+  emoji_selected: boolean = false;
   selectedFile;
   imagePreviewSrc: any = [];
 
   ngOnInit(): void {
+    this.message = "";
     this.localeStorageService.me$.subscribe((me) => {
       this.me = me;
       this.ms = new FormData();
@@ -45,6 +54,15 @@ export class MakeCommentComponent implements OnInit {
       this.gif_image = img;
       if (this.gif_image) this.gif_selected = false;
     });
+    this.emojiCategoryService
+      .get_emoji_categories()
+      .subscribe((emoji_categories: EmojiCategory[]) => {
+        console.log(emoji_categories);
+      });
+  }
+
+  receiveMessage($event: string): void {
+    this.message = $event;
   }
 
   onChangeImage(event: any) {
@@ -70,6 +88,7 @@ export class MakeCommentComponent implements OnInit {
     if (type === 'image') element.click();
     else if (type === 'gif') this.gif_selected = !this.gif_selected;
     else if (type === 'sticker') this.sticker_selected = !this.sticker_selected;
+    else if (type === 'emoji') this.emoji_selected = !this.emoji_selected;
   }
 
   closeImage() {
@@ -79,26 +98,33 @@ export class MakeCommentComponent implements OnInit {
     this.ms.delete('gif');
   }
 
+  WriteMessage(){
+    console.log(this.message);
+    
+    // this.messageService.message$.pipe(
+    //   distinctUntilChanged()
+    // ).subscribe(message => {
+    //   this.message = message;
+    //   this.messageService.update_message(message);      
+    // })
+  }
   SendMessage() {
-
     if (this.message) this.ms.append('comment', this.message);
     if (this.gif_image) this.ms.append('gif', this.gif_image.id);
     this.ms.append('post', this.current_post.id);
     if (this.comment_id) this.ms.append('replied_to', this.comment_id);
 
     this.messageService.addComment(this.ms).subscribe((added_message) => {
-      this.postService
-        .getPostById(this.current_post.id)
-        .subscribe((post) => {
-          console.log(post);
-          
-          this.current_post.comments = post.comments;
-          // this.postService.update_current_post(post);
-          this.ms = new FormData();
-          this.ms.append('user', this.me.id);
-          this.message = '';
-          this.closeImage();
-        });
+      this.postService.getPostById(this.current_post.id).subscribe((post) => {
+        console.log(post);
+
+        this.current_post.comments = post.comments;
+        // this.postService.update_current_post(post);
+        this.ms = new FormData();
+        this.ms.append('user', this.me.id);
+        this.message = '';
+        this.closeImage();
+      });
     });
   }
 }

@@ -1,0 +1,30 @@
+<div class="emoji-box">
+  <div class="emoji-header"></div>
+  <div class="emoji-body">
+    <ul class="emoji-list" *ngFor="let emoji_category of emoji_categories">
+        <h5 [id]="emoji_category.name.toLowerCase()" class="category-text">{{ emoji_category.name }}</h5>
+      <li
+        class="emoji-item"
+        *ngFor="let emoji of emoji_category.emojis"
+      >
+        <button class="emoji-btn" (click)="ChooseEmoji(emoji.code)">
+          <img [src]="emoji.image" width="20" height="20" alt="emoji" />
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="emoji-footer">
+    <ul class="emoji-category-list">
+      <li
+        class="emoji-category-item"
+        *ngFor="let emoji_category of emoji_categories"
+      >
+        <button (click)="chooseCategory(emoji_category.name.toLowerCase())" class="emoji-category-btn" >
+          <span class="emoji-category-icon">
+            <i [class]="emoji_category.icon_code"></i>
+          </span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

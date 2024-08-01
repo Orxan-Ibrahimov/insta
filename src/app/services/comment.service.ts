@@ -18,12 +18,18 @@ export class CommentService {
     });
    }
   private commentSubject: BehaviorSubject<Comment[]> = new BehaviorSubject<Comment[]>([]);
+  private messageSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private image_subject: BehaviorSubject<GIF> = new BehaviorSubject<GIF>(null);
   comments$: Observable<Comment[]> = this.commentSubject.asObservable();
   image$: Observable<GIF> = this.image_subject.asObservable();
+  message$: Observable<string> = this.messageSubject.asObservable();
 
   updateData(newData: Comment[]) {
     this.commentSubject.next(newData);
+  }
+
+  update_message(text:string) {
+    this.messageSubject.next(text);
   }
 
   update_image(comment: GIF) {
