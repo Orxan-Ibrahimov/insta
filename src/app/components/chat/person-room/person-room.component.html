@@ -1,7 +1,11 @@
 <div class="person">
   <div class="person-header">
     <button class="person-data">
-      <img src="../../../../assets/img/img2.png" class="person-img" alt="person" />
+      <img
+        src="../../../../assets/img/img2.png"
+        class="person-img"
+        alt="person"
+      />
       <div class="person-details">
         <h5 class="person-title">Əli Məhərrəmli</h5>
         <p class="person-text">5s once aktifti</p>
@@ -37,7 +41,11 @@
   <p class="username">brain000452 · Instagram</p>
   <button class="profile-btn">View Profile</button>
 
-  <ul class="message-list">
+  <ul class="message-list" *ngIf="chat_group.chat_messages.length > 0">
+    <app-chat-message-item [message]="chat_message" *ngFor="let chat_message of chat_group.chat_messages"> </app-chat-message-item>
+  </ul>
+
+  <!-- <ul class="message-list">
     <li class="message-item my-message">
       <div class="message-body">
         <p class="message-text">Salam</p>
@@ -116,7 +124,5 @@
         <p class="message-text only-emoji">😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄</p>
       </div>
     </li>
-  </ul>
-
-  
+  </ul> -->
 </div>

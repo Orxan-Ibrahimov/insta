@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChatComponent } from './chat.component';
 import { DefaultRoomComponent } from './default-room/default-room.component';
 import { PersonRoomComponent } from './person-room/person-room.component';
+import { ChatMessageItemComponent } from './chat-message-item/chat-message-item.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [DefaultRoomComponent, PersonRoomComponent],
+  declarations: [DefaultRoomComponent, PersonRoomComponent, ChatMessageItemComponent],
   imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class ChatModule {}

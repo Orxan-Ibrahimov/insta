@@ -26,16 +26,16 @@
       }
 
       & > .person-details {
-        margin: 0 .5rem;
+        margin: 0 0.5rem;
         & > .person-title {
           margin-bottom: 0;
         }
 
         & > .person-text {
-            margin-bottom: 0;
-            font-size: small;
-            text-align: left;
-          }
+          margin-bottom: 0;
+          font-size: small;
+          text-align: left;
+        }
       }
     }
 
@@ -87,71 +87,6 @@
     width: 100%;
     padding: 0;
     margin: 3rem 0;
-    & > .message-item {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      padding: 0 1rem;
-      margin-bottom: 1rem;
-
-      & > .message-body {
-        & > .message-text {
-          padding: 0.4rem 1rem;
-          border-radius: 1.5rem;
-          max-width: 600px;
-          text-wrap: wrap;
-          overflow-wrap: break-word;
-          margin-bottom: 0;
-        }
-
-        & > .message-emotion {
-          background-color: var(--chat-selected);
-          padding: 0.2rem 0.5rem;
-          border-radius: 0.5rem;
-          transform: translateY(-50%);
-          font-size: 0.75rem;
-          margin: 0 1rem;
-        }
-
-        & > .only-emoji {
-          background-color: transparent !important;
-          font-size: 3rem;
-          padding: 0;
-          text-align: center;
-
-          & + .message-emotion {
-            margin: 0 !important;
-          }
-        }
-      }
-    }
-
-    & > .my-message {
-      & > .message-body {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        width: 100%;
-        & > .message-text {
-          background-color: var(--my-message);
-          color: white;
-        }
-      }
-    }
-
-    & > .other-message {
-      & > .message-body {
-        & > .message-text {
-          background-color: var(--chat-selected);
-          color: black;
-        }
-      }
-
-      & > .other-image {
-        width: 50px;
-        height: 50px;
-        margin-right: 0.5rem;
-      }
-    }
+   
   }
 }

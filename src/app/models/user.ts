@@ -1,3 +1,4 @@
+import { ChatGroup } from "./chat_group";
 import { Citizenship } from "./citizenship";
 import { Post } from "./postData";
 import { StickerPack } from "./sticker_pack";
@@ -17,4 +18,5 @@ export interface User {
   followers?:User[];
   followings?:User[];
   sticker_packs?:StickerPack[];
+  chat_groups?: ChatGroup[];
 }

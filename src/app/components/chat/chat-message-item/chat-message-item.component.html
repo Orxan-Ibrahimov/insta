@@ -1,0 +1,22 @@
+<li
+  class="message-item"
+  [ngClass]="{
+    'my-message': message.sender.id === me.id,
+    'other-message': message.sender.id !== me.id
+  }"
+>
+  <img
+    *ngIf="message.sender.id !== me.id"
+    [src]="message.sender.profile"
+    class="other-image"
+    alt="person"
+  />
+  <div class="message-body">
+    <p class="message-text" [ngClass]="{ 'only-emoji': is_emoji }">
+      {{ message.message }}
+    </p>
+    <button *ngIf="message.emotion" class="message-emotion">
+      {{ message.emotion }}
+    </button>
+  </div>
+</li>

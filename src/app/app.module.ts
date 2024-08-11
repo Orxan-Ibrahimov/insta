@@ -29,7 +29,6 @@ import { ProfileEditModalComponent } from './components/modals/profile-edit-moda
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthModule } from './components/auth/auth.module';
 import { FollowerItemComponent } from './components/followers-card/follower-item/follower-item.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentItemComponent } from './components/comments/comment-item/comment-item.component';
@@ -38,6 +37,8 @@ import { GifsComponent } from './components/gifs/gifs.component';
 import { StickersComponent } from './components/stickers/stickers.component';
 import { EmojisComponent } from './components/emojis/emojis.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ChatGroupItemComponent } from './components/chat/chat-group-item/chat-group-item.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { ChatComponent } from './components/chat/chat.component';
     GifsComponent,
     StickersComponent,
     EmojisComponent,
-    ChatComponent
+    ChatComponent,
+    ChatGroupItemComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+<li class="contact-item active-contact">
+    <a [routerLink]="chat.id" class="contact-person">
+      <img
+        [src]="user.profile"
+        class="contact-image"
+        alt="person"
+        *ngFor="let user of chat.users"
+      />
+      <div class="contact-person-info">
+        <h5 class="contact-person-title">Elza Necefquliyeva</h5>
+        <span class="contact-person-small">2s once aktifti</span>
+      </div>
+    </a>       
+  </li>
