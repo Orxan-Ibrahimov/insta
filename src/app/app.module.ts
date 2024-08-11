@@ -37,6 +37,7 @@ import { MakeCommentComponent } from './components/comments/make-comment/make-co
 import { GifsComponent } from './components/gifs/gifs.component';
 import { StickersComponent } from './components/stickers/stickers.component';
 import { EmojisComponent } from './components/emojis/emojis.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { EmojisComponent } from './components/emojis/emojis.component';
     MakeCommentComponent,
     GifsComponent,
     StickersComponent,
-    EmojisComponent
+    EmojisComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

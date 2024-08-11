@@ -1,0 +1,109 @@
+::-webkit-scrollbar {
+  display: inline-block;
+  background: beige;
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: aqua; /* Color of the track */
+  border-radius: 10px; /* Rounded corners of the track */
+}
+::-webkit-scrollbar-thumb {
+  background: red; /* Color of the handle */
+  border-radius: 10px; /* Rounded corners of the handle */
+}
+::-webkit-scrollbar-corner {
+  background: #f1f1f1; /* Color of the bottom-right corner */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the handle on hover */
+}
+
+.chat {
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+  
+  & > .chat-left {
+    width: 30%;
+    overflow: auto;
+    background-color: white;
+    position: relative;
+    z-index: 1;
+ 
+
+    & > .chat-left-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+      & > .username {
+        font-size: medium;
+        font-weight: bold;
+      }
+
+      & > .create-chat {
+      }
+    }
+
+    & > .chat-left-contact {      
+      
+
+      & > .contact-title {
+        margin: 0 1rem;
+        font-size: large;
+        font-weight: bold;
+      }
+      & > .contact-list {
+        padding: 0;
+       
+        & > .contact-item {
+          margin: 0.5rem 0;
+          transition: background-color 0.4s;
+
+          &:not(.active-contact):hover {
+            background-color: rgb(253 248 253);
+          }
+
+          & > .contact-person {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 1;
+
+            & > .contact-image {
+              width: 75px;
+              height: 75px;
+              border-radius: 50%;
+            }
+
+            & > .contact-person-info {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              margin: 0 1rem;
+              & > .contact-person-title {
+                font-size: medium;
+                font-weight: bold;
+              }
+              & > .contact-person-small {
+                font-size: small;
+              }
+            }
+          }
+        }
+
+        & > .active-contact {
+          background-color: rgb(239 239 239);
+        }
+      }
+    }
+  }
+
+  & > .chat-right{
+    width: 70%;
+    background-color: white;
+    overflow: auto;
+
+  }
+}
